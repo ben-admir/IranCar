@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+</head>
+<body>
+    <h1>Open code</h1>
+    <dev id="banner">
+
+
+    </dev>
+
+    <footer>
+        footer
+    </footer>
+    <script type="text/babel">
+        const Banner = () => {
+            const title="wellcome to my";
+            const title1="site";
+            
+            return (
+                <div>
+                    <h2>Banner</h2>
+                    
+                    <p>{title} {title1}</p>
+                    <p> Today's Date <b>:</b> {new Date().toDateString()}</p>
+                    <p>Random Number : {Math.random() * 100 }</p>
+                    <a href="http://bmw.com"> Click Here</a>
+                    </div>
+            )
+        }
+
+        ReactDOM.render(<Banner/> ,document.getElementById('banner')); 
+
+
+    </script>
+</body>
+</html>
