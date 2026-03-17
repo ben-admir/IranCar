@@ -19,6 +19,11 @@
         const Banner = () => {
             const title="wellcome to my";
             const title1="site";
+            const address="http://bmw.com";
+            const clickHandle =() =>{
+                console.log("this is my first Website");
+                console.log(title,title1);
+            }
             
             return (
                 <div>
@@ -27,12 +32,32 @@
                     <p>{title} {title1}</p>
                     <p> Today's Date <b>:</b> {new Date().toDateString()}</p>
                     <p>Random Number : {Math.random() * 100 }</p>
-                    <a href="http://bmw.com"> Click Here</a>
+                    <a href={address}> Click Here</a>
+                    <br/>
+                    <br/>
+
+                    <button onClick={clickHandle}> Press Me</button>
                     </div>
             )
         }
+        const CarCard = (props) => {
+  return (
+    <div className="car-card">
+      <h2>{props.name}</h2>
+      <p>قیمت: {props.price} تومان</p>
+      <button onClick={() => alert(`${props.name} انتخاب شد`)}>جزئیات بیشتر</button>
+    </div>
+  );
+}
 
-        ReactDOM.render(<Banner/> ,document.getElementById('banner')); 
+        const root = ReactDOM.createRoot(document.getElementById('banner'));
+root.render(<Banner />);
+root.render(
+  <div>
+    <CarCard name="پژو ۲۰۶" price="۵۰۰,۰۰۰,۰۰۰" />
+    <CarCard name="تسلای کارکرده!" price="۲,۰۰۰,۰۰۰,۰۰۰" />
+  </div>
+);
 
 
     </script>
