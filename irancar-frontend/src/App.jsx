@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Shop from './pages/Shop';
 import AdminPanel from './pages/AdminPanel';
+import AddCar from './pages/AddCar';
 import About from './pages/About';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Instagram, Send } from 'lucide-react';
@@ -23,6 +24,7 @@ const Navbar = () => (
                 <Link className="nav-link text-white small-caps" to="/about">درباره ما</Link>
 
         <Link className="nav-link text-white small-caps" to="/admin">مدیریت</Link>
+        <Link className="nav-link text-white small-caps" to="/add-car">ثبت آگهی</Link>
                 <Link className="nav-link text-white small-caps" to="/shop">نمایشگاه</Link>
                 <Link className="nav-link text-white small-caps" to="/">صفحه اصلی</Link>
 
@@ -97,7 +99,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/admin" element={<AdminPanel />} />
+            <Route path="/add-car" element={<AddCar />} />
             <Route path="/about" element={<About />} />
+
           </Routes>
         </div>
 

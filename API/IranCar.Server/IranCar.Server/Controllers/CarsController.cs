@@ -22,16 +22,30 @@ namespace IranCar.Server.Controllers
             return await _context.Cars.ToListAsync();
         }
 
-        
-        [HttpPost] 
-        public async Task<ActionResult<Car>> PostCar(Car car)
+
+        [HttpPost]
+        public async Task<ActionResult<Car>> PostCar([FromBody] Car car)
         {
-            _context.Cars.Add(car);
-            await _context.SaveChangesAsync();
-            return Ok(car);
+            if (car == null)
+            {
+                return BadRequest("اطلاعات خودرو وارد نشده است.");
+            }
+
+            try
+            {
+                _context.Cars.Add(car);
+
+                await _context.SaveChangesAsync();
+
+                return Ok(car);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"خطای سرور: {ex.Message}");
+            }
         }
 
-        
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdatePrice(int id, [FromBody] long newPrice)
         {
