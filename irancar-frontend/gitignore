@@ -1,7 +1,7 @@
-node_modules/
+[Bb]in/
+[Oo]bj/
 .vs/
-bin/
-obj/
 *.user
 *.suo
-*.vshost.*
+*.v10.bin
+node_modules/

@@ -9,39 +9,40 @@ const AddCar = () => {
     brand: '',
     price: '',
     year: '2026',
-    color: '', // فیلد رنگ اضافه شد
-    kilometers: '',
+    color: '',
     description: '',
-    image: null
   });
+  
+  const [imageFile, setImageFile] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const carData = {
-      Brand: car.brand,
-      Name: car.name,
-      Color: car.color || "نامشخص",
-      Price: parseInt(car.price),
-      Year: parseInt(car.year) || 2026
-    };
+    const formData = new FormData();
+    formData.append('Brand', car.brand);
+    formData.append('Name', car.name);
+    formData.append('Color', car.color || "نامشخص");
+    formData.append('Price', parseInt(car.price));
+    formData.append('Year', parseInt(car.year) || 2026);
+    formData.append('Description', car.description || "");
+    
+    if (imageFile) {
+      formData.append('ImageFile', imageFile); 
+    }
 
     try {
       const response = await fetch('https://localhost:7017/api/Cars', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(carData),
+        body: formData, 
       });
 
       if (response.ok) {
-        alert("ایول! ماشین با موفقیت ثبت شد. حالا بریم نمایشگاه رو ببینیم! ✅");
+        alert("ایول! ماشین با موفقیت و عکس واقعی ثبت شد. ✅");
         navigate('/shop'); 
       } else {
-        const errorDetail = await response.text();
-        alert("سرور قبول نکرد: " + errorDetail);
+        alert("سرور خطا داد. حتماً چک کن که فیلدها پر باشن.");
       }
     } catch (error) {
-      alert("ارتباط با سرور قطع شده!");
+      alert("ارتباط با سرور برقرار نشد.");
     }
   };
 
@@ -52,78 +53,60 @@ const AddCar = () => {
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }}
           className="card bg-secondary bg-opacity-10 border border-secondary p-4 p-md-5 rounded-5 shadow-lg"
-          style={{ backdropFilter: 'blur(10px)' }}
         >
-          <h2 className="text-center fw-bold mb-5 text-primary fs-1">ثبت آگهی فروش</h2>
+          <h2 className="text-center fw-bold mb-5 text-primary">ثبت آگهی جدید</h2>
           
           <form onSubmit={handleSubmit} className="row g-4">
-            {/* نام خودرو */}
-            <div className="col-md-6">
-              <label className="form-label text-light fw-bold mb-2">نام خودرو</label>
-              <input type="text" className="form-control bg-dark text-white border-secondary rounded-pill p-3" 
-                placeholder="مثلاً: بنز S500" onChange={(e) => setCar({...car, name: e.target.value})} required />
+            {/* نام و برند */}
+            <div className="col-md-6 text-start">
+              <label className="form-label fw-bold">نام خودرو</label>
+              <input type="text" className="form-control bg-dark text-white border-secondary p-3" 
+                onChange={(e) => setCar({...car, name: e.target.value})} required />
             </div>
             
-            {/* برند */}
-            <div className="col-md-6">
-              <label className="form-label text-light fw-bold mb-2">برند</label>
-              <select className="form-select bg-dark text-white border-secondary rounded-pill p-3"
+            <div className="col-md-6 text-start">
+              <label className="form-label fw-bold">برند</label>
+              <select className="form-select bg-dark text-white border-secondary p-3"
                 onChange={(e) => setCar({...car, brand: e.target.value})} required>
-                <option value="">انتخاب برند...</option>
+                <option value="">انتخاب...</option>
                 <option value="Mercedes">مرسدس بنز</option>
                 <option value="BMW">بی‌ام‌و</option>
                 <option value="Porsche">پورشه</option>
-                <option value="Tesla">تسلا</option>
               </select>
             </div>
 
-            {/* رنگ خودرو */}
-            <div className="col-md-6">
-              <label className="form-label text-light fw-bold mb-2">رنگ خودرو</label>
-              <input type="text" placeholder="مثلاً: مشکی متالیک" 
-                className="form-control bg-dark text-white border-secondary rounded-pill p-3"
-                onChange={(e) => setCar({...car, color: e.target.value})} />
-            </div>
-            
-            {/* قیمت */}
-            <div className="col-md-6">
-              <label className="form-label text-light fw-bold mb-2">قیمت (تومان)</label>
-              <input type="number" className="form-control bg-dark text-white border-secondary rounded-pill p-3" 
+            {/* قیمت و رنگ */}
+            <div className="col-md-6 text-start">
+              <label className="form-label fw-bold">قیمت (تومان)</label>
+              <input type="number" className="form-control bg-dark text-white border-secondary p-3" 
                 onChange={(e) => setCar({...car, price: e.target.value})} required />
             </div>
 
-            {/* کارکرد */}
-            <div className="col-md-6">
-              <label className="form-label text-light fw-bold mb-2">کارکرد (کیلومتر)</label>
-              <input type="number" className="form-control bg-dark text-white border-secondary rounded-pill p-3" 
-                onChange={(e) => setCar({...car, kilometers: e.target.value})} />
+            <div className="col-md-6 text-start">
+              <label className="form-label fw-bold">رنگ</label>
+              <input type="text" className="form-control bg-dark text-white border-secondary p-3" 
+                onChange={(e) => setCar({...car, color: e.target.value})} />
             </div>
 
-            {/* سال ساخت (تست) */}
-            <div className="col-md-6">
-              <label className="form-label text-light fw-bold mb-2">سال ساخت</label>
-              <input type="number" className="form-control bg-dark text-white border-secondary rounded-pill p-3" 
-                value={car.year} onChange={(e) => setCar({...car, year: e.target.value})} />
+            {/* آپلود عکس */}
+            <div className="col-12 text-start">
+              <label className="form-label fw-bold">انتخاب عکس ماشین</label>
+              <input 
+                type="file" 
+                className="form-control bg-dark text-white border-secondary p-3"
+                onChange={(e) => setImageFile(e.target.files[0])}
+                required 
+              />
             </div>
 
-            {/* توضیحات */}
-            <div className="col-12">
-              <label className="form-label text-light fw-bold mb-2">توضیحات تکمیلی</label>
-              <textarea className="form-control bg-dark text-white border-secondary rounded-4 p-3" rows="3"
-                placeholder="توضیحات بیشتر در مورد سلامت فنی و..."
-                onChange={(e) => setCar({...car, description: e.target.value})}></textarea>
-            </div>
-
-            {/* دکمه ارسال */}
+            {/* دکمه ثبت (اینجاست!) */}
             <div className="col-12 mt-5">
-              <motion.button 
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+              <button 
                 type="submit" 
-                className="btn btn-primary w-100 py-3 rounded-pill fw-bold fs-5 shadow-lg border-0"
+                className="btn btn-primary w-100 py-3 rounded-pill fw-bold fs-5 shadow"
               >
-                انتشار آگهی در ایران‌کار
-              </motion.button>
+                ثبت و انتشار آگهی 🚀
+              </button>
             </div>
           </form>
         </motion.div>
