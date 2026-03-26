@@ -8,65 +8,49 @@ namespace IranCar.Server.Controllers
     [ApiController]
     public class CarsController : ControllerBase
     {
-        private readonly AppDbContext _context; 
+        private readonly AppDbContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public CarsController(AppDbContext context)
+        public CarsController(AppDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
-        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Car>>> GetCars()
         {
             return await _context.Cars.ToListAsync();
         }
 
-
         [HttpPost]
-        public async Task<ActionResult<Car>> PostCar([FromBody] Car car)
+        public async Task<ActionResult<Car>> PostCar([FromForm] Car car)
         {
-            if (car == null)
-            {
-                return BadRequest("اطلاعات خودرو وارد نشده است.");
-            }
-
             try
             {
+                if (car.ImageFile != null)
+                {
+                    string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                    if (!Directory.Exists(uploadsFolder)) Directory.CreateDirectory(uploadsFolder);
+
+                    string fileName = Guid.NewGuid().ToString() + "_" + car.ImageFile.FileName;
+                    string filePath = Path.Combine(uploadsFolder, fileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await car.ImageFile.CopyToAsync(fileStream);
+                    }
+                    car.ImageName = fileName;
+                }
+
                 _context.Cars.Add(car);
-
                 await _context.SaveChangesAsync();
-
                 return Ok(car);
             }
             catch (Exception ex)
             {
                 return StatusCode(500, $"خطای سرور: {ex.Message}");
             }
-        }
-
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePrice(int id, [FromBody] long newPrice)
-        {
-            var car = await _context.Cars.FindAsync(id);
-            if (car == null) return NotFound();
-
-            car.Price = newPrice;
-            await _context.SaveChangesAsync();
-            return Ok(car);
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCar(int id)
-        {
-            var car = await _context.Cars.FindAsync(id);
-            if (car == null) return NotFound();
-
-            _context.Cars.Remove(car);
-            await _context.SaveChangesAsync();
-
-            return NoContent(); 
         }
     }
 }
