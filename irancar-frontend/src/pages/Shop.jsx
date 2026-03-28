@@ -30,6 +30,7 @@ const Shop = () => {
     }, []);
 
     if (loading) return <div className="text-center mt-5 text-white">در حال بارگذاری نمایشگاه...</div>;
+    
 
     return (
         <div className="container mt-5">
