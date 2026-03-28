@@ -30,26 +30,33 @@ namespace IranCar.Server.Controllers
             {
                 if (car.ImageFile != null)
                 {
-                    string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
-                    if (!Directory.Exists(uploadsFolder)) Directory.CreateDirectory(uploadsFolder);
+                    var rootPath = _webHostEnvironment.WebRootPath ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+                    string uploadsFolder = Path.Combine(rootPath, "images");
 
-                    string fileName = Guid.NewGuid().ToString() + "_" + car.ImageFile.FileName;
+                    if (!Directory.Exists(uploadsFolder))
+                    {
+                        Directory.CreateDirectory(uploadsFolder);
+                    }
+
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(car.ImageFile.FileName);
                     string filePath = Path.Combine(uploadsFolder, fileName);
 
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
                     {
                         await car.ImageFile.CopyToAsync(fileStream);
                     }
+
                     car.ImageName = fileName;
                 }
 
                 _context.Cars.Add(car);
                 await _context.SaveChangesAsync();
+
                 return Ok(car);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"خطای سرور: {ex.Message}");
+                return StatusCode(500, $"خطای سرور: {ex.Message} Inner: {ex.InnerException?.Message}");
             }
         }
     }

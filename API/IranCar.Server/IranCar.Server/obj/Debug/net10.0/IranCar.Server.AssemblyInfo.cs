@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IranCar.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+685ab63c23aa0e4c00a4132d7176a223f742be47")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e73033b8880fa965cec07cd3ce2647ff41b4dbb9")]
 [assembly: System.Reflection.AssemblyProductAttribute("IranCar.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IranCar.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

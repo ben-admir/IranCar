@@ -5,3 +5,9 @@
 *.suo
 *.v10.bin
 node_modules/
+.vs/
+[Oo]bj/
+[Bb]in/
+*.vsidx
+*.suo
+*.user
