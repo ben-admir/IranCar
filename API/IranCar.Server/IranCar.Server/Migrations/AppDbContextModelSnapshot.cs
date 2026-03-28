@@ -34,7 +34,12 @@ namespace IranCar.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Color")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")

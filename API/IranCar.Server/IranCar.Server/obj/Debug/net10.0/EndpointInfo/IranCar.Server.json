@@ -6,10 +6,10 @@
   },
   "servers": [
     {
-      "url": "https://localhost:55553"
+      "url": "https://localhost:55352"
     },
     {
-      "url": "http://localhost:55555"
+      "url": "http://localhost:55353"
     }
   ],
   "paths": {
@@ -56,19 +56,53 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/components/schemas/Car"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Car"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Car"
+                "type": "object",
+                "properties": {
+                  "Id": {
+                    "pattern": "^-?(?:0|[1-9]\\d*)$",
+                    "type": [
+                      "integer",
+                      "string"
+                    ],
+                    "format": "int32"
+                  },
+                  "Brand": {
+                    "type": "string"
+                  },
+                  "Name": {
+                    "type": "string"
+                  },
+                  "Color": {
+                    "type": "string"
+                  },
+                  "Price": {
+                    "pattern": "^-?(?:0|[1-9]\\d*)$",
+                    "type": [
+                      "integer",
+                      "string"
+                    ],
+                    "format": "int64"
+                  },
+                  "Year": {
+                    "pattern": "^-?(?:0|[1-9]\\d*)$",
+                    "type": [
+                      "integer",
+                      "string"
+                    ],
+                    "format": "int32"
+                  },
+                  "Description": {
+                    "type": "string"
+                  },
+                  "ImageName": {
+                    "type": "string"
+                  },
+                  "ImageFile": {
+                    "$ref": "#/components/schemas/IFormFile"
+                  }
+                }
               }
             }
           },
@@ -94,93 +128,6 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/api/Cars/{id}": {
-      "put": {
-        "tags": [
-          "Cars"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "type": [
-                "integer",
-                "string"
-              ],
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "pattern": "^-?(?:0|[1-9]\\d*)$",
-                "type": [
-                  "integer",
-                  "string"
-                ],
-                "format": "int64"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "pattern": "^-?(?:0|[1-9]\\d*)$",
-                "type": [
-                  "integer",
-                  "string"
-                ],
-                "format": "int64"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "pattern": "^-?(?:0|[1-9]\\d*)$",
-                "type": [
-                  "integer",
-                  "string"
-                ],
-                "format": "int64"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Cars"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "type": [
-                "integer",
-                "string"
-              ],
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
           }
         }
       }
@@ -239,16 +186,10 @@
             "format": "int32"
           },
           "brand": {
-            "type": [
-              "null",
-              "string"
-            ]
+            "type": "string"
           },
           "name": {
-            "type": [
-              "null",
-              "string"
-            ]
+            "type": "string"
           },
           "color": {
             "type": [
@@ -271,8 +212,34 @@
               "string"
             ],
             "format": "int32"
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "imageName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "imageFile": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/IFormFile"
+              }
+            ]
           }
         }
+      },
+      "IFormFile": {
+        "type": "string",
+        "format": "binary"
       },
       "WeatherForecast": {
         "type": "object",

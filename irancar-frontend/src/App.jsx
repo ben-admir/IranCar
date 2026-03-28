@@ -4,6 +4,7 @@ import Shop from './pages/Shop';
 import AdminPanel from './pages/AdminPanel';
 import AddCar from './pages/AddCar';
 import About from './pages/About';
+import UserAuth from './pages/UserAuth'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Instagram, Send } from 'lucide-react';
 
@@ -22,6 +23,7 @@ const Navbar = () => (
       </Link>
       <div className="navbar-nav ms-auto d-flex flex-row gap-4">
                 <Link className="nav-link text-white small-caps" to="/about">درباره ما</Link>
+                <Link to="/user-auth" className="btn btn-warning">حساب کاربری </Link>
 
         <Link className="nav-link text-white small-caps" to="/admin">مدیریت</Link>
         <Link className="nav-link text-white small-caps" to="/add-car">ثبت آگهی</Link>
@@ -101,6 +103,7 @@ function App() {
             <Route path="/admin" element={<AdminPanel />} />
             <Route path="/add-car" element={<AddCar />} />
             <Route path="/about" element={<About />} />
+            <Route path="/user-auth" element={<UserAuth />} />
 
           </Routes>
         </div>
