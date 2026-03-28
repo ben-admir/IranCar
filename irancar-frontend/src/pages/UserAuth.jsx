@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const UserAuth = () => {
-    const [isLogin, setIsLogin] = useState(true); // سوئیچ بین ورود و ثبت‌نام
+    const [isLogin, setIsLogin] = useState(true); 
     const [formData, setFormData] = useState({ email: '', password: '', name: '' });
     const navigate = useNavigate();
 
@@ -11,12 +11,10 @@ const UserAuth = () => {
         e.preventDefault();
         try {
             if (isLogin) {
-                // منطق ورود کاربر (باید در سی‌شارپ هندل شود)
                 console.log("در حال ورود کاربر...", formData);
                 localStorage.setItem("userRole", "user"); 
-                navigate("/add-car"); // بعد از ورود برود برای ثبت آگهی
+                navigate("/add-car"); 
             } else {
-                // منطق ثبت‌نام کاربر
                 console.log("در حال ثبت‌نام کاربر جدید...");
                 alert("ثبت‌نام موفق! حالا وارد شوید.");
                 setIsLogin(true);
