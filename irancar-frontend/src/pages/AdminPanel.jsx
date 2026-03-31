@@ -17,7 +17,11 @@ const AdminPanel = () => {
     window.location.href = '/login'; 
 };
   
-    useEffect(() => { fetchCars(); }, []);
+    useEffect(() => { fetchCars(); 
+        if (localStorage.getItem('isAdmin') !== 'true') {
+    window.location.href = '/login'; 
+  }
+    }, []);
 
     const handleDelete = async (id) => {
         if (window.confirm("حذف شود؟")) {
@@ -110,7 +114,6 @@ const AdminPanel = () => {
     );
 };
 
-// استایل‌ها (بدون تغییر نسبت به قبل، فقط thTdStyle اضافه شد)
 const tableStyle = { width: '95%', margin: '0 auto', borderCollapse: 'collapse', backgroundColor: 'white', boxShadow: '0 5px 15px rgba(0,0,0,0.1)', borderRadius: '10px', overflow: 'hidden' };
 const thTdStyle = { padding: '15px', textAlign: 'center' };
 const editBtnStyle = { backgroundColor: '#f1c40f', color: '#000', border: 'none', padding: '8px 12px', borderRadius: '5px', cursor: 'pointer', marginLeft: '5px' };

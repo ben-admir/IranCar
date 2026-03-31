@@ -1,135 +1,134 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { User, Mail, Lock, ArrowRight } from 'lucide-react';
 
 const UserAuth = () => {
-  const [isLogin, setIsLogin] = useState(true);
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-    email: "",
-  });
-
+  const [isLogin, setIsLogin] = useState(true); 
+  const [showPassword, setShowPassword] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    
-    const baseUrl = "https://localhost:7017/api/auth";
-    const url = isLogin ? `${baseUrl}/login` : `${baseUrl}/register`;
 
-    try {
-      Swal.fire({
-        title: 'در حال بررسی...',
-        background: '#1a1a1a',
-        color: '#fff',
-        allowOutsideClick: false,
-        didOpen: () => { Swal.showLoading(); }
-      });
-
-      const response = await axios.post(url, formData);
-
-      if (response.data) {
-        localStorage.setItem("userName", formData.username);
-
-        await Swal.fire({
-          title: isLogin ? `خوش آمدید، ${formData.username}! 🏎️` : 'ثبت‌نام با موفقیت انجام شد! 🎉',
-          text: 'وارد دنیای سرعت ایران‌کار شدید.',
-          icon: 'success',
-          background: '#1a1a1a',
-          color: '#fff',
-          confirmButtonColor: '#ffc107',
-          confirmButtonText: 'بزن بریم!',
-        });
-
-        navigate("/");
-        window.location.reload(); 
-      }
-    } catch (error) {
-      console.error("خطا:", error);
+    if (!isLogin) {
+      const userData = { name, email, password };
       
-      let errorMsg = "نام کاربری یا رمز عبور اشتباه است ❌";
-      if (error.response?.status === 404) {
-        errorMsg = "مسیر ورود پیدا نشد (ارور ۴۰۴). لطفاً بک‌اِند را چک کنید!";
+      localStorage.setItem(`user_${email}`, JSON.stringify(userData));
+      
+      alert("ثبت‌نام با موفقیت انجام شد! حالا وارد شوید.");
+      setIsLogin(true); 
+    } else {
+      const savedUser = localStorage.getItem(`user_${email}`);
+      
+      if (savedUser) {
+        const userData = JSON.parse(savedUser);
+        
+        if (userData.password === password) {
+          localStorage.setItem("userName", userData.name);
+          localStorage.setItem("userId", email);
+          
+          alert(`خوش آمدی ${userData.name}!`);
+          navigate('/'); 
+          window.location.reload();
+        } else {
+          alert("رمز عبور اشتباه است!");
+        }
+      } else {
+        alert("کاربری با این ایمیل پیدا نشد. ابتدا ثبت‌نام کنید.");
       }
-
-      Swal.fire({
-        title: 'خطا در عملیات!',
-        text: errorMsg,
-        icon: 'error',
-        background: '#1a1a1a',
-        color: '#fff',
-        confirmButtonColor: '#d33',
-        confirmButtonText: 'تلاش دوباره'
-      });
     }
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: "85vh" }}>
-      <div className="card p-4 shadow-lg bg-dark text-white shadow-yellow" style={{ width: "100%", maxWidth: "400px", border: "1px solid #444" }}>
-        <h2 className="text-center mb-4 text-warning fw-bold" style={{ letterSpacing: '1px' }}>
-          {isLogin ? "ورود به ایران‌کار" : "عضویت در ایران‌کار"}
+    <div className="container d-flex justify-content-center align-items-center vh-100" dir="rtl">
+      <div className="card p-4 shadow-lg bg-dark text-white border-secondary" style={{ width: '450px', borderRadius: '20px' }}>
+        <h2 className="text-center mb-4 text-warning fw-bold">
+          {isLogin ? 'ورود به حساب' : 'ساخت حساب کاربری'}
         </h2>
         
         <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label className="form-label text-secondary small">نام کاربری:</label>
-            <input
-              type="text"
-              className="form-control bg-secondary text-white border-0 py-2 shadow-none"
-              placeholder="Username"
-              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-              required
-            />
-          </div>
-
           {!isLogin && (
             <div className="mb-3">
-              <label className="form-label text-secondary small">ایمیل:</label>
-              <input
-                type="email"
-                className="form-control bg-secondary text-white border-0 py-2 shadow-none"
-                placeholder="Email Address"
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                required
-              />
+              <label className="form-label small">نام و نام خانوادگی:</label>
+              <div className="input-group">
+                <span className="input-group-text bg-secondary border-0"><User size={18} /></span>
+                <input 
+                  type="text" 
+                  className="form-control bg-secondary text-white border-0" 
+                  placeholder="مثلاً محمد علوی"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required 
+                />
+              </div>
             </div>
           )}
 
-          <div className="mb-4">
-            <label className="form-label text-secondary small">رمز عبور:</label>
-            <input
-              type="password"
-              className="form-control bg-secondary text-white border-0 py-2 shadow-none"
-              placeholder="Password"
-              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-              required
-            />
+          <div className="mb-3">
+            <label className="form-label small">ایمیل:</label>
+            <div className="input-group">
+              <span className="input-group-text bg-secondary border-0"><Mail size={18} /></span>
+              <input 
+                type="email" 
+                className="form-control bg-secondary text-white border-0" 
+                placeholder="example@mail.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required 
+              />
+            </div>
           </div>
 
-          <button type="submit" className="btn btn-warning w-100 fw-bold py-2 mb-3">
-            {isLogin ? "ورود به حساب" : "ساخت حساب کاربری"}
-          </button>
+          <div className="mb-3">
+  <label className="form-label small text-secondary">رمز عبور:</label>
+  <div className="input-group mb-2">
+    <span className="input-group-text bg-secondary border-0 text-white">
+      <Lock size={18} />
+    </span>
+    <input 
+      type={showPassword ? "text" : "password"} 
+      className="form-control bg-secondary text-white border-0" 
+      placeholder="******"
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+      required 
+    />
+  </div>
 
-          <p className="text-center small mb-0 text-secondary">
-            {isLogin ? "هنوز ثبت‌نام نکردید؟ " : "قبلاً عضو شده‌اید؟ "}
-            <span
-              className="text-primary fw-bold"
-              style={{ cursor: "pointer", textDecoration: "none" }}
+  <div className="form-check form-check-inline mt-1">
+    <input 
+      className="form-check-input bg-secondary border-secondary" 
+      type="checkbox" 
+      id="showPassCheck"
+      checked={showPassword}
+      onChange={() => setShowPassword(!showPassword)} 
+    />
+    
+    <p>نمایش رمز عبور
+</p>
+    <label className="form-check-label small text-secondary" htmlFor="showPassCheck" style={{ cursor: 'pointer' }}>
+    </label>
+  </div>
+</div>
+<button type="submit" className="btn btn-warning w-100 fw-bold py-2 mb-3 rounded-3 shadow-sm">
+  {isLogin ? 'ورود به حساب' : 'تایید و ساخت حساب'}
+</button>
+
+          <div className="text-center">
+            <button 
+              type="button" 
+              className="btn btn-link text-info text-decoration-none small"
               onClick={() => setIsLogin(!isLogin)}
             >
-              {isLogin ? "ایجاد حساب" : "وارد شوید"}
-            </span>
-          </p>
+              {isLogin ? 'هنوز ثبت‌نام نکردی؟ کلیک کن' : 'قبلاً ثبت‌نام کردی؟ وارد شو'}
+            </button>
+          </div>
         </form>
       </div>
-
-      <style>{`
-        .shadow-yellow { box-shadow: 0 0 20px rgba(255, 193, 7, 0.1) !important; }
-        input:focus { background-color: #444 !important; color: #fff !important; }
-      `}</style>
     </div>
   );
 };
