@@ -35,6 +35,7 @@ builder.Services.AddCors(options =>
                           .AllowAnyHeader());
 });
 var app = builder.Build();
+app.UseCors("AllowAll");
 
 app.UseStaticFiles();
 
@@ -44,7 +45,6 @@ app.UseCors();
 
 app.MapDefaultEndpoints();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();

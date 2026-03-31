@@ -1,5 +1,6 @@
 C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server\bin\Debug\net10.0\appsettings.Development.json
 C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server\bin\Debug\net10.0\appsettings.json
+C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server\bin\Debug\net10.0\IranCar.Server.staticwebassets.runtime.json
 C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server\bin\Debug\net10.0\IranCar.Server.staticwebassets.endpoints.json
 C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server\bin\Debug\net10.0\IranCar.Server.exe
 C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server\bin\Debug\net10.0\IranCar.Server.deps.json
@@ -182,4 +183,3 @@ C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server\obj\De
 C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server\obj\Debug\net10.0\IranCar.Server.pdb
 C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server\obj\Debug\net10.0\IranCar.Server.genruntimeconfig.cache
 C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server\obj\Debug\net10.0\ref\IranCar.Server.dll
-C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server\bin\Debug\net10.0\IranCar.Server.staticwebassets.runtime.json

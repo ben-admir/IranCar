@@ -5,7 +5,7 @@
 namespace IranCar.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialUserTable : Migration
+    public partial class SyncUserTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

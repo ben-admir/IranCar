@@ -1,77 +1,64 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Shop = () => {
+    const navigate = useNavigate();
     const [cars, setCars] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const API_BASE_URL = "https://localhost:7017";
-
     useEffect(() => {
-        const fetchCars = async () => {
-            try {
-                const response = await fetch(`${API_BASE_URL}/api/Cars`);
-                
-                if (!response.ok) {
-                    throw new Error("خطا در پاسخ سرور");
-                }
-
-                const data = await response.json();
-                setCars(data);
+        axios.get('https://localhost:7017/api/cars')
+            .then(res => {
+                setCars(res.data);
                 setLoading(false);
-            } catch (error) {
-                console.error("خطا در دریافت لیست ماشین‌ها:", error);
-                alert("سرور متصل نیست ❌");
-
+            })
+            .catch(err => {
+                console.error("خطا در دریافت لیست:", err);
                 setLoading(false);
-            }
-        };
-
-        fetchCars();
+            });
     }, []);
 
-    if (loading) return <div className="text-center mt-5 text-white">در حال بارگذاری نمایشگاه...</div>;
-    
-
     return (
-        <div className="container mt-5">
-            <h2 className="text-center mb-5 text-black fw-bold">🏎️ نمایشگاه خودرو ایران‌کار</h2>
-            <div className="row">
-                {cars.length === 0 ? (
-                    <div className="text-center text-light">هیچ خودرویی برای نمایش یافت نشد.</div>
-                ) : (
-                    cars.map((car) => (
-                        <div key={car.id} className="col-md-4 mb-4">
-                            <div className="card bg-dark text-white border-secondary h-100 shadow-lg">
-                           <img 
-    src={car.imageName ? `${API_BASE_URL}/images/${car.imageName}` : null} 
-    className="card-img-top" 
-    alt={car.name || "خودرو"}
-    style={{ height: '220px', objectFit: 'cover', backgroundColor: '#333' }}
-    onError={(e) => { 
-        e.target.onerror = null; 
-        e.target.src = "https://via.placeholder.com/400x250?text=تصویر+یافت+نشد"; 
-    }}
+        <div className="container py-5" dir="rtl">
+            <h2 className="text-center text-white mb-5 fw-bold">نمایشگاه <span className="text-warning">ایران‌کار</span></h2>
+            {loading ? (
+                <div className="text-center text-white"><div className="spinner-border text-warning"></div></div>
+            ) : (
+                <div className="row g-4">
+                    {cars.map((car, index) => {
+                        const id = car.id || car.Id || car.ID;
+                        const brand = car.brand || car.Brand || "نامشخص";
+                        const model = car.model || car.Model || "";
+                        const price = car.price || car.Price || 0;
+                        const img = car.imageUrl || car.ImageUrl;
+
+                        return (
+                            <div className="col-md-4" key={id || index}>
+                                <div className="card bg-dark text-white border-secondary h-100 shadow">
+                                    <img 
+  src={car.imageName 
+    ? `https://localhost:7017/images/${car.imageName}` 
+    : 'https://via.placeholder.com/300x200?text=No+Image'} 
+  className="card-img-top" 
+  alt={car.brand} 
 />
-                                <div className="card-body d-flex flex-column">
-                                    <h5 className="card-title text-info">{car.brand} {car.name}</h5>
-                                    
-                                    <p className="card-text mb-1">رنگ: {car.color}</p>
-                                    <p className="card-text text-success fs-5 fw-bold">
-                                        {parseInt(car.price).toLocaleString()} تومان
-                                    </p>
-                                    <div className="mt-auto">
-                                        <button 
-    className="btn btn-primary" 
-    onClick={() => alert(`جزئیات خودرو: ${car.brand} ${car.name}\nرنگ: ${car.color}\nقیمت: ${car.price}`)}>
-    مشاهده جزئیات
-</button>
+                                    <div className="card-body">
+                                        <h5 className="fw-bold text-warning">{brand} {model}</h5>
+                                        <div className="d-flex justify-content-between align-items-center mt-4 border-top pt-3 border-secondary">
+                                            <span className="text-success fw-bold">{Number(price).toLocaleString()} تومان</span>
+                                            <button className="btn btn-primary btn-sm px-3" 
+                                                onClick={() => id ? navigate(`/car-details/${id}`) : alert("آیدی خودرو یافت نشد")}>
+                                                جزئیات
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    ))
-                )}
-            </div>
+                        );
+                    })}
+                </div>
+            )}
         </div>
     );
 };

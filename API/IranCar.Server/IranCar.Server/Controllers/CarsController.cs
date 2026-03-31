@@ -23,41 +23,116 @@ namespace IranCar.Server.Controllers
             return await _context.Cars.ToListAsync();
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Car>> GetCar(int id)
+        {
+            var car = await _context.Cars.FindAsync(id);
+            if (car == null) return NotFound();
+            return car;
+        }
+
         [HttpPost]
-        public async Task<ActionResult<Car>> PostCar([FromForm] Car car)
+        public async Task<ActionResult<Car>> PostCar([FromForm] CarCreateDto carDto)
         {
             try
             {
-                if (car.ImageFile != null)
+                var car = new Car
+                {
+                    Brand = carDto.Brand,
+                    Name = carDto.Name,
+                    Price = carDto.Price,
+                    Color = carDto.Color,
+                    Year = carDto.Year
+                };
+
+                if (carDto.ImageFile != null)
                 {
                     var rootPath = _webHostEnvironment.WebRootPath ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
                     string uploadsFolder = Path.Combine(rootPath, "images");
+                    if (!Directory.Exists(uploadsFolder)) Directory.CreateDirectory(uploadsFolder);
 
-                    if (!Directory.Exists(uploadsFolder))
-                    {
-                        Directory.CreateDirectory(uploadsFolder);
-                    }
-
-                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(car.ImageFile.FileName);
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(carDto.ImageFile.FileName);
                     string filePath = Path.Combine(uploadsFolder, fileName);
 
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
                     {
-                        await car.ImageFile.CopyToAsync(fileStream);
+                        await carDto.ImageFile.CopyToAsync(fileStream);
                     }
-
                     car.ImageName = fileName;
                 }
 
                 _context.Cars.Add(car);
                 await _context.SaveChangesAsync();
-
                 return Ok(car);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"خطای سرور: {ex.Message} Inner: {ex.InnerException?.Message}");
+                return StatusCode(500, $"خطای سرور: {ex.Message}");
             }
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutCar(int id, [FromForm] CarCreateDto carDto)
+        {
+            var car = await _context.Cars.FindAsync(id);
+            if (car == null) return NotFound();
+
+            car.Brand = carDto.Brand;
+            car.Name = carDto.Name;
+            car.Price = carDto.Price;
+            car.Color = carDto.Color;
+            car.ImageFile = carDto.ImageFile;
+            car.Year = carDto.Year;
+
+            if (carDto.ImageFile != null)
+            {
+                var rootPath = _webHostEnvironment.WebRootPath ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(carDto.ImageFile.FileName);
+                string filePath = Path.Combine(rootPath, "images", fileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await carDto.ImageFile.CopyToAsync(fileStream);
+                }
+                car.ImageName = fileName;
+            }
+
+            _context.Entry(car).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCar(int id)
+        {
+            var car = await _context.Cars.FindAsync(id);
+            if (car == null)
+            {
+                return NotFound();
+            }
+
+            if (!string.IsNullOrEmpty(car.ImageName))
+            {
+                var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", car.ImageName);
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
+            }
+
+            _context.Cars.Remove(car);
+            await _context.SaveChangesAsync();
+
+            return NoContent(); 
+        }
+    }
+
+    public class CarCreateDto
+    {
+        public string? Brand { get; set; }
+        public string? Name { get; set; }
+        public string? Color { get; set; }
+        public long Price { get; set; }
+        public int Year { get; set; }
+        public IFormFile? ImageFile { get; set; }
     }
 }

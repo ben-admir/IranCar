@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IranCar.Server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260328130430_InitialUserTable")]
-    partial class InitialUserTable
+    [Migration("20260328145512_SyncUserTable")]
+    partial class SyncUserTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

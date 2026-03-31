@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios'; 
+import axios from 'axios';
 
 const AddCar = () => {
     const [car, setCar] = useState({
@@ -7,6 +7,7 @@ const AddCar = () => {
         name: '',
         color: '',
         price: '',
+        year: '',
         imageFile: null
     });
 
@@ -20,44 +21,68 @@ const AddCar = () => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
+
         const formData = new FormData();
-        formData.append("brand", car.brand);
-        formData.append("name", car.name);
-        formData.append("color", car.color);
-        formData.append("price", car.price);
+        
+        formData.append('Brand', car.brand);
+        formData.append('Name', car.name);
+        formData.append('Color', car.color);
+        formData.append('Price', car.price);
+        formData.append('Year', car.year);
+        
         if (car.imageFile) {
-            formData.append("imageFile", car.imageFile);
+            formData.append('ImageFile', car.imageFile);
         }
 
         try {
-            const response = await axios.post("https://localhost:7017/api/Cars", formData, {
+            const response = await axios.post('https://localhost:7017/api/cars', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
 
-            if (response.status === 200 || response.status === 201) {
-                alert("✅ ایول! ماشین با موفقیت ثبت شد.");
-                window.location.href = "/shop";
-            }
+            console.log("پاسخ سرور:", response.data);
+            alert("آگهی با موفقیت ثبت شد! ✅");
+            
+            setCar({ brand: '', name: '', color: '', price: '', year: '', imageFile: null });
         } catch (error) {
-            console.error("خطا در ثبت:", error);
-            alert("❌ ثبت نشد! کنسول مرورگر (F12) رو چک کن.");
+            console.error("خطا در ثبت آگهی:", error.response?.data || error.message);
+            alert("خطا در ثبت آگهی. کنسول را چک کنید.");
         }
     };
 
     return (
-        <div className="container mt-5 text-white">
-            <h2>ثبت خودرو جدید</h2>
+        <div style={{ padding: '20px', maxWidth: '500px', margin: '0 auto', direction: 'rtl' }}>
+            <h2>ثبت خودروی جدید</h2>
             <form onSubmit={handleSubmit}>
-                <input type="text" name="brand" placeholder="برند (مثلاً BMW)" className="form-control mb-2" onChange={handleChange} required />
-                <input type="text" name="name" placeholder="نام (مثلاً i8)" className="form-control mb-2" onChange={handleChange} required />
-                <input type="text" name="color" placeholder="رنگ" className="form-control mb-2" onChange={handleChange} required />
-                <input type="number" name="price" placeholder="قیمت" className="form-control mb-2" onChange={handleChange} required />
-                <input type="file" className="form-control mb-3" onChange={handleFileChange} accept="image/*" />
-                
-                <button type="submit" className="btn btn-success w-100">ثبت و انتشار در نمایشگاه</button>
+                <div style={{ marginBottom: '10px' }}>
+                    <label>برند:</label>
+                    <input type="text" name="brand" value={car.brand} onChange={handleChange} style={{ width: '100%' }} required />
+                </div>
+                <div style={{ marginBottom: '10px' }}>
+                    <label>مدل (Name):</label>
+                    <input type="text" name="name" value={car.name} onChange={handleChange} style={{ width: '100%' }} required />
+                </div>
+                <div style={{ marginBottom: '10px' }}>
+                    <label>رنگ:</label>
+                    <input type="text" name="color" value={car.color} onChange={handleChange} style={{ width: '100%' }} />
+                </div>
+                <div style={{ marginBottom: '10px' }}>
+                    <label>قیمت:</label>
+                    <input type="number" name="price" value={car.price} onChange={handleChange} style={{ width: '100%' }} required />
+                </div>
+                <div style={{ marginBottom: '10px' }}>
+                    <label>سال تولید:</label>
+                    <input type="number" name="year" value={car.year} onChange={handleChange} style={{ width: '100%' }} />
+                </div>
+                <div style={{ marginBottom: '10px' }}>
+                    <label>تصویر خودرو:</label>
+                    <input type="file" onChange={handleFileChange} style={{ width: '100%' }} accept="image/*" />
+                </div>
+                <button type="submit" style={{ padding: '10px 20px', backgroundColor: '#007bff', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+                    انتشار آگهی
+                </button>
             </form>
         </div>
     );

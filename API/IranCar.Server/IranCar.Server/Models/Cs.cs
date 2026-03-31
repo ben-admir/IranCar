@@ -15,6 +15,7 @@ namespace IranCar.Server.Models
         public int Year { get; set; }
         public string? Description { get; set; }
         public string? ImageName { get; set; }
+        public string OwnerName { get; set; } = string.Empty;
 
         [NotMapped]
         public IFormFile? ImageFile { get; set; }
