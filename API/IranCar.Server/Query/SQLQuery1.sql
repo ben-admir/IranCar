@@ -1,1 +1,7 @@
-﻿DELETE FROM Cars WHERE Brand = '' OR Price = 0
+﻿DELETE FROM Cars WHERE Brand = '' OR Price = 0;
+CREATE TABLE Users (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Email NVARCHAR(100) NOT NULL UNIQUE,
+    Password NVARCHAR(255) NOT NULL,
+    CreatedAt DATETIME DEFAULT GETDATE()
+);

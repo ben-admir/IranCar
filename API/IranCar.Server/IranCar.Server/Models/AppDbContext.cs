@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using IranCar.Server.Models;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace IranCar.Server.Models 
 {
@@ -10,5 +12,6 @@ namespace IranCar.Server.Models
 
         public DbSet<Car> Cars { get; set; }
         public DbSet<User> Users { get; set; }
+
     }
 }
