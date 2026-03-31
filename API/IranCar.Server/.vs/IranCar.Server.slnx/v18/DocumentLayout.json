@@ -3,12 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\prime computer\\Desktop\\IranCar\\API\\IranCar.Server\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DD11C487-66C6-0B81-25DA-656DD2B9FF40}|IranCar.Server\\IranCar.Server.csproj|c:\\users\\prime computer\\desktop\\irancar\\api\\irancar.server\\irancar.server\\models\\cs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DD11C487-66C6-0B81-25DA-656DD2B9FF40}|IranCar.Server\\IranCar.Server.csproj|solutionrelative:irancar.server\\models\\cs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DD11C487-66C6-0B81-25DA-656DD2B9FF40}|IranCar.Server\\IranCar.Server.csproj|c:\\users\\prime computer\\desktop\\irancar\\api\\irancar.server\\irancar.server\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{DD11C487-66C6-0B81-25DA-656DD2B9FF40}|IranCar.Server\\IranCar.Server.csproj|solutionrelative:irancar.server\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DD11C487-66C6-0B81-25DA-656DD2B9FF40}|IranCar.Server\\IranCar.Server.csproj|c:\\users\\prime computer\\desktop\\irancar\\api\\irancar.server\\irancar.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DD11C487-66C6-0B81-25DA-656DD2B9FF40}|IranCar.Server\\IranCar.Server.csproj|solutionrelative:irancar.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DD11C487-66C6-0B81-25DA-656DD2B9FF40}|IranCar.Server\\IranCar.Server.csproj|c:\\users\\prime computer\\desktop\\irancar\\api\\irancar.server\\irancar.server\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DD11C487-66C6-0B81-25DA-656DD2B9FF40}|IranCar.Server\\IranCar.Server.csproj|solutionrelative:irancar.server\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DD11C487-66C6-0B81-25DA-656DD2B9FF40}|IranCar.Server\\IranCar.Server.csproj|c:\\users\\prime computer\\desktop\\irancar\\api\\irancar.server\\irancar.server\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DD11C487-66C6-0B81-25DA-656DD2B9FF40}|IranCar.Server\\IranCar.Server.csproj|solutionrelative:irancar.server\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DD11C487-66C6-0B81-25DA-656DD2B9FF40}|IranCar.Server\\IranCar.Server.csproj|c:\\users\\prime computer\\desktop\\irancar\\api\\irancar.server\\irancar.server\\models\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DD11C487-66C6-0B81-25DA-656DD2B9FF40}|IranCar.Server\\IranCar.Server.csproj|solutionrelative:irancar.server\\models\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DD11C487-66C6-0B81-25DA-656DD2B9FF40}|IranCar.Server\\IranCar.Server.csproj|c:\\users\\prime computer\\desktop\\irancar\\api\\irancar.server\\irancar.server\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DD11C487-66C6-0B81-25DA-656DD2B9FF40}|IranCar.Server\\IranCar.Server.csproj|solutionrelative:irancar.server\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DD11C487-66C6-0B81-25DA-656DD2B9FF40}|IranCar.Server\\IranCar.Server.csproj|c:\\users\\prime computer\\desktop\\irancar\\api\\irancar.server\\irancar.server\\controllers\\carscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DD11C487-66C6-0B81-25DA-656DD2B9FF40}|IranCar.Server\\IranCar.Server.csproj|solutionrelative:irancar.server\\controllers\\carscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DD11C487-66C6-0B81-25DA-656DD2B9FF40}|IranCar.Server\\IranCar.Server.csproj|c:\\users\\prime computer\\desktop\\irancar\\api\\irancar.server\\irancar.server\\models\\cs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DD11C487-66C6-0B81-25DA-656DD2B9FF40}|IranCar.Server\\IranCar.Server.csproj|solutionrelative:irancar.server\\models\\cs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,8 +42,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\prime computer\\Desktop\\IranCar\\API\\IranCar.Server\\IranCar.Server\\.gitignore",
+              "RelativeDocumentMoniker": "IranCar.Server\\.gitignore",
+              "ToolTip": "C:\\Users\\prime computer\\Desktop\\IranCar\\API\\IranCar.Server\\IranCar.Server\\.gitignore",
+              "RelativeToolTip": "IranCar.Server\\.gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAGAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAF8SURBVDhPjVNLTgJBEG1lwpoFB3GNK9fieA48hD8iwT/ihwgSDAIHgAGXXsEV18CNzL/LquqZdsYM6kteXqcy3fWqpmpNRBgOhyABBEgpAFVKPIMUcYzUyOU\u002BXM/b2qtU3vkSfRjjZTCAMAw1A2LwzdFoBPP5HNqdzuL27n4juibWI\u002BUshBA1DIkhEx9iEorFotgslQqGYbxxAGFEqt1MxmPWJLbLZdZ\u002Bv89q5PMFPiTR6z2zdaxR0fXA0XTBcVywkb4fwHXjRteecIDNQ7UmExVYAdPcxYaqclN46na5WenMKjtlVnTYwcXlVYaDqImW9beD5N/TeGy32QHXm6hZ03ZgiSQHp2fnWQ4oBmJqWSqwAqZpZjt4aLXAD4J0VqyZsmoubfB8H2r1eoaD6NXZ9HcHO\u002BSA3f4AjifXl8rItOETM8ckB9WTWpYD9RdeZ1PWVWAHWXPQaDb59f/w8LiqHeh1pvGkCaP6qB8yXusoxmuNZ7XmII4O9vGuEF86osuDYRkpYQAAAABJRU5ErkJggg==",
+              "WhenOpened": "2026-03-31T20:34:25.238Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
@@ -34,29 +71,88 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Users\\prime computer\\Desktop\\IranCar\\API\\IranCar.Server\\IranCar.Server\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "IranCar.Server\\Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Users\\prime computer\\Desktop\\IranCar\\API\\IranCar.Server\\IranCar.Server\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "IranCar.Server\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAQwCwAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-31T20:13:01.215Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\prime computer\\Desktop\\IranCar\\API\\IranCar.Server\\IranCar.Server\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "IranCar.Server\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\prime computer\\Desktop\\IranCar\\API\\IranCar.Server\\IranCar.Server\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "IranCar.Server\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwBIAAABOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-28T20:27:16.75Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\prime computer\\Desktop\\IranCar\\API\\IranCar.Server\\IranCar.Server\\Models\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "IranCar.Server\\Models\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\prime computer\\Desktop\\IranCar\\API\\IranCar.Server\\IranCar.Server\\Models\\AppDbContext.cs",
+              "RelativeToolTip": "IranCar.Server\\Models\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-28T12:55:44.1Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\prime computer\\Desktop\\IranCar\\API\\IranCar.Server\\IranCar.Server\\Models\\User.cs",
+              "RelativeDocumentMoniker": "IranCar.Server\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\prime computer\\Desktop\\IranCar\\API\\IranCar.Server\\IranCar.Server\\Models\\User.cs",
+              "RelativeToolTip": "IranCar.Server\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-28T12:52:42.111Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\prime computer\\Desktop\\IranCar\\API\\IranCar.Server\\IranCar.Server\\Program.cs",
+              "RelativeDocumentMoniker": "IranCar.Server\\Program.cs",
+              "ToolTip": "C:\\Users\\prime computer\\Desktop\\IranCar\\API\\IranCar.Server\\IranCar.Server\\Program.cs",
+              "RelativeToolTip": "IranCar.Server\\Program.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAADQAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-27T11:07:47.736Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "Cs.cs",
               "DocumentMoniker": "C:\\Users\\prime computer\\Desktop\\IranCar\\API\\IranCar.Server\\IranCar.Server\\Models\\Cs.cs",
               "RelativeDocumentMoniker": "IranCar.Server\\Models\\Cs.cs",
               "ToolTip": "C:\\Users\\prime computer\\Desktop\\IranCar\\API\\IranCar.Server\\IranCar.Server\\Models\\Cs.cs",
               "RelativeToolTip": "IranCar.Server\\Models\\Cs.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwBAAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-25T00:02:07.322Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-25T00:02:07.322Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "CarsController.cs",
               "DocumentMoniker": "C:\\Users\\prime computer\\Desktop\\IranCar\\API\\IranCar.Server\\IranCar.Server\\Controllers\\CarsController.cs",
               "RelativeDocumentMoniker": "IranCar.Server\\Controllers\\CarsController.cs",
               "ToolTip": "C:\\Users\\prime computer\\Desktop\\IranCar\\API\\IranCar.Server\\IranCar.Server\\Controllers\\CarsController.cs",
               "RelativeToolTip": "IranCar.Server\\Controllers\\CarsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-20T14:22:03.06Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-20T14:22:03.06Z"
             }
           ]
         }

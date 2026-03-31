@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "IranCar.Server.AppHost\\IranCar.Server.AppHost.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "IranCar.Server\\IranCar.Server.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

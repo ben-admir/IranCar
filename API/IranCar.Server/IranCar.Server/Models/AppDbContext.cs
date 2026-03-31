@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using IranCar.Server.Models;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace IranCar.Server.Models 
 {
@@ -8,7 +10,8 @@ namespace IranCar.Server.Models
         {
         }
 
-        // این خط یعنی ما یک جدول به اسم Cars در دیتابیس می‌خواهیم
         public DbSet<Car> Cars { get; set; }
+        public DbSet<User> Users { get; set; }
+
     }
 }

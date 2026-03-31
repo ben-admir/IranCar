@@ -21,10 +21,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.AddServiceDefaults();
 
-// Add services to the container.
+
 
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
 builder.Services.AddOpenApi();
 
 builder.Services.AddCors(options =>
@@ -35,6 +35,9 @@ builder.Services.AddCors(options =>
                           .AllowAnyHeader());
 });
 var app = builder.Build();
+app.UseCors("AllowAll");
+
+app.UseStaticFiles();
 
 app.UseCors("AllowReact");
 
@@ -42,7 +45,6 @@ app.UseCors();
 
 app.MapDefaultEndpoints();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
@@ -53,5 +55,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
 app.Run();
