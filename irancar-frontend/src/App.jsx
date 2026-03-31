@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate, useNavigate, Link, useLocation } from 'react-router-dom';
-
+import { Toaster } from 'react-hot-toast';
 import Home from './pages/Home';
 import Shop from './pages/Shop';
 import Login from './Login'; 
@@ -73,6 +73,7 @@ function App() {
   return (
     <div className="d-flex flex-column min-vh-100 bg-dark text-white"> 
       <Navbar />
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="flex-grow-1">
         <Routes>
           <Route path="/" element={<Home />} />

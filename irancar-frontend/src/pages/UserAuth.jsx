@@ -1,47 +1,53 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import axios from 'axios';
 import { User, Mail, Lock, ArrowRight } from 'lucide-react';
 
+
 const UserAuth = () => {
+  const [loading, setLoading] = useState(false);
   const [isLogin, setIsLogin] = useState(true); 
   const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   
+  
   const navigate = useNavigate();
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const API_URL = "https://localhost:7017/api/Auth"; 
 
-    if (!isLogin) {
-      const userData = { name, email, password };
+  try {
+    if (isLogin) {
+      const response = await axios.post(`${API_URL}/login`, { email, password });
       
-      localStorage.setItem(`user_${email}`, JSON.stringify(userData));
+      localStorage.setItem("userName", response.data.userName);
+      localStorage.setItem("token", response.data.token); 
       
-      alert("ثبت‌نام با موفقیت انجام شد! حالا وارد شوید.");
-      setIsLogin(true); 
+      toast.success(`خوش آمدید، ${response.data.userName}!`);
+      
+      setTimeout(() => {
+        navigate('/');
+        window.location.reload();
+      }, 1500);
+
     } else {
-      const savedUser = localStorage.getItem(`user_${email}`);
+      const response = await axios.post(`${API_URL}/register`, { email, password, name: email.split('@')[0] });
       
-      if (savedUser) {
-        const userData = JSON.parse(savedUser);
-        
-        if (userData.password === password) {
-          localStorage.setItem("userName", userData.name);
-          localStorage.setItem("userId", email);
-          
-          alert(`خوش آمدی ${userData.name}!`);
-          navigate('/'); 
-          window.location.reload();
-        } else {
-          alert("رمز عبور اشتباه است!");
-        }
-      } else {
-        alert("کاربری با این ایمیل پیدا نشد. ابتدا ثبت‌نام کنید.");
-      }
+      toast.success("ثبت‌نام با موفقیت انجام شد! حالا وارد شوید.");
+      setIsLogin(true); 
     }
-  };
+  } catch (error) {
+    const errorMsg = error.response?.data?.message || "خطا در اتصال به سرور!";
+    toast.error(errorMsg);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100" dir="rtl">
@@ -114,8 +120,12 @@ const UserAuth = () => {
     </label>
   </div>
 </div>
-<button type="submit" className="btn btn-warning w-100 fw-bold py-2 mb-3 rounded-3 shadow-sm">
-  {isLogin ? 'ورود به حساب' : 'تایید و ساخت حساب'}
+<button 
+  type="submit" 
+  className="btn btn-warning w-100 fw-bold py-2 mb-3"
+  disabled={loading}
+>
+  {loading ? "در حال پردازش..." : (isLogin ? "ورود به حساب" : "ثبت‌نام")}
 </button>
 
           <div className="text-center">
