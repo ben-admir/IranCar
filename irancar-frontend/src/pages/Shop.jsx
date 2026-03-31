@@ -1,72 +1,66 @@
-import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Shop = () => {
-  const [cars, setCars] = useState([]);
-  const [selectedCar, setSelectedCar] = useState(null); // برای ذخیره ماشین انتخاب شده
+    const navigate = useNavigate();
+    const [cars, setCars] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetch('https://localhost:7017/api/cars')
-      .then(res => res.json())
-      .then(data => setCars(data))
-      .catch(err => console.error("خطا:", err));
-  }, []);
+    useEffect(() => {
+        axios.get('https://localhost:7017/api/cars')
+            .then(res => {
+                setCars(res.data);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error("خطا در دریافت لیست:", err);
+                setLoading(false);
+            });
+    }, []);
 
-  return (
-    <div className="bg-dark min-vh-100 py-5 text-white" dir="rtl">
-      <div className="container">
-        <h2 className="text-center fw-bold mb-5">کاتالوگ خودروها</h2>
-        
-        <div className="row g-4">
-          {cars.map((car) => (
-            <div className="col-lg-4 col-md-6" key={car.id}>
-              <div className="card h-100 border-0 bg-secondary bg-opacity-25 rounded-4 shadow-sm overflow-hidden">
-                <img src={`https://images.unsplash.com/photo-1503376780353-7e6692767b70`} className="card-img-top" style={{height: '200px', objectFit: 'cover'}} />
-                <div className="card-body p-4 text-end">
-                  <h4>{car.name}</h4>
-                  <button 
-                    className="btn btn-primary rounded-pill w-100 mt-3"
-                    onClick={() => setSelectedCar(car)} // تنظیم ماشین برای نمایش در مودال
-                  >
-                    مشاهده جزئیات
-                  </button>
+    return (
+        <div className="container py-5" dir="rtl">
+            <h2 className="text-center text-white mb-5 fw-bold">نمایشگاه <span className="text-warning">ایران‌کار</span></h2>
+            {loading ? (
+                <div className="text-center text-white"><div className="spinner-border text-warning"></div></div>
+            ) : (
+                <div className="row g-4">
+                    {cars.map((car, index) => {
+                        const id = car.id || car.Id || car.ID;
+                        const brand = car.brand || car.Brand || "نامشخص";
+                        const model = car.model || car.Model || "";
+                        const price = car.price || car.Price || 0;
+                        const img = car.imageUrl || car.ImageUrl;
+
+                        return (
+                            <div className="col-md-4" key={id || index}>
+                                <div className="card bg-dark text-white border-secondary h-100 shadow">
+                                    <img 
+  src={car.imageName 
+    ? `https://localhost:7017/images/${car.imageName}` 
+    : 'https://via.placeholder.com/300x200?text=No+Image'} 
+  className="card-img-top" 
+  alt={car.brand} 
+/>
+                                    <div className="card-body">
+                                        <h5 className="fw-bold text-warning">{brand} {model}</h5>
+                                        <div className="d-flex justify-content-between align-items-center mt-4 border-top pt-3 border-secondary">
+                                            <span className="text-success fw-bold">{Number(price).toLocaleString()} تومان</span>
+                                            <button className="btn btn-primary btn-sm px-3" 
+                                                onClick={() => id ? navigate(`/car-details/${id}`) : alert("آیدی خودرو یافت نشد")}>
+                                                جزئیات
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
-              </div>
-            </div>
-          ))}
+            )}
         </div>
-      </div>
-
-      {/* بخش مودال با استفاده از Framer Motion */}
-      <AnimatePresence>
-        {selectedCar && (
-          <div className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style={{ zIndex: 1050, background: 'rgba(0,0,0,0.8)' }}>
-            <motion.div 
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              className="bg-dark border border-secondary p-5 rounded-5 shadow-lg position-relative text-end"
-              style={{ maxWidth: '500px', width: '90%' }}
-            >
-              <button 
-                className="btn btn-sm btn-outline-danger position-absolute top-0 start-0 m-3 rounded-circle"
-                onClick={() => setSelectedCar(null)}
-              >✕</button>
-              
-              <h2 className="text-primary fw-bold mb-4">{selectedCar.name}</h2>
-              <ul className="list-unstyled fs-5">
-                <li className="mb-2">🏁 برند: {selectedCar.brand}</li>
-                <li className="mb-2">💰 قیمت: {Number(selectedCar.price).toLocaleString()} تومان</li>
-                <li className="mb-2 text-info">⚙️ شتاب ۰ تا ۱۰۰: ۳.۵ ثانیه</li>
-                <li className="mb-2 text-info">🏎️ حداکثر سرعت: ۳۲۰ کیلومتر</li>
-              </ul>
-              <button className="btn btn-success w-100 mt-4 rounded-pill py-2 fw-bold">نهایی کردن خرید</button>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
+    );
 };
 
 export default Shop;

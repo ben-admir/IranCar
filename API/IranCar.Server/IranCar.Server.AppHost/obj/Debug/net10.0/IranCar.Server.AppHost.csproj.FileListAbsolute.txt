@@ -90,6 +90,7 @@ C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server.AppHos
 C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server.AppHost\obj\Debug\net10.0\IranCar.Server.AppHost.csproj.CoreCompileInputs.cache
 C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server.AppHost\obj\Debug\net10.0\Aspire\references\IranCar_Server.ProjectMetadata.g.cs
 C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server.AppHost\obj\Debug\net10.0\Aspire\references\_AppHost.ProjectMetadata.g.cs
+C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server.AppHost\obj\Debug\net10.0\IranCar.Server.AppHost.sourcelink.json
 C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server.AppHost\obj\Debug\net10.0\IranCar..AEBF416C.Up2Date
 C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server.AppHost\obj\Debug\net10.0\IranCar.Server.AppHost.dll
 C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server.AppHost\obj\Debug\net10.0\refint\IranCar.Server.AppHost.dll

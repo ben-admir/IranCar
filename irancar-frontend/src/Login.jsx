@@ -1,51 +1,54 @@
 import React, { useState } from 'react';
-import { User, Lock, LogIn } from 'lucide-react';
-import './Login.css';
+import { useNavigate } from 'react-router-dom';
 
-const Login = ({ onLogin }) => {
-  const [credentials, setCredentials] = useState({ username: '', password: '' });
+const Login = () => {
+  const [userField, setUserField] = useState('');
+  const [passField, setPassField] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    if (credentials.username === 'admin' && credentials.password === '1234') {
-      onLogin(true);
-    } 
-    else {
-      alert('نام کاربری یا رمز عبور اشتباه است! ❌');
-      setCredentials({username: '', password: '' });
+
+    if (userField === 'admin' && passField === '1234') {
+      
+      localStorage.setItem('isAdmin', 'true');
+      localStorage.setItem('userName', 'مدیر سیستم');
+
+      navigate('/admin');
+      window.location.reload();
+    } else {
+      alert("نام کاربری یا رمز عبور ادمین اشتباه است! ❌");
     }
   };
 
   return (
-    <div className="login-container">
-      <div className="login-box">
-        <div className="login-header">
-          <h2>ورود به پنل ایران‌کار</h2>
-          <p>خوش آمدید، لطفاً وارد شوید</p>
-        </div>
-        <form onSubmit={handleSubmit}>
-          <div className="input-group-custom">
-            <User size={20} className="icon" />
+    <div className="container d-flex justify-content-center align-items-center vh-100">
+      <div className="card p-4 shadow-lg bg-dark text-white border-secondary" style={{ width: '400px' }}>
+        <h2 className="text-center mb-4 text-info">ورود مدیریت</h2>
+        <form onSubmit={handleLogin}>
+          <div className="mb-3">
+            <label className="form-label">نام کاربری ادمین:</label>
             <input 
               type="text" 
-              placeholder="نام کاربری" 
-              value={credentials.username}
-              onChange={(e) => setCredentials({...credentials, username: e.target.value})}
+              className="form-control bg-secondary text-white border-0"
+              value={userField}
+              onChange={(e) => setUserField(e.target.value)} 
+              placeholder="مثلاً admin"
+              required
             />
           </div>
-          <div className="input-group-custom">
-            <Lock size={20} className="icon" />
+          <div className="mb-3">
+            <label className="form-label">رمز عبور:</label>
             <input 
               type="password" 
-              placeholder="رمز عبور" 
-              value={credentials.password}
-              onChange={(e) => setCredentials({...credentials, password: e.target.value})}
+              className="form-control bg-secondary text-white border-0"
+              value={passField}
+              onChange={(e) => setPassField(e.target.value)} 
+              placeholder="مثلاً 1234"
+              required
             />
           </div>
-          <button type="submit" className="login-button">
-            <span>ورود</span>
-            <LogIn size={20} />
-          </button>
+          <button type="submit" className="btn btn-info w-100 fw-bold">ورود به پنل</button>
         </form>
       </div>
     </div>
