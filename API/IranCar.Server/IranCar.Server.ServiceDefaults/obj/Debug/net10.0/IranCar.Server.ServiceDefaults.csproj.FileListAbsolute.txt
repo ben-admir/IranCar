@@ -1,0 +1,13 @@
+C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server.ServiceDefaults\bin\Debug\net10.0\IranCar.Server.ServiceDefaults.deps.json
+C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server.ServiceDefaults\bin\Debug\net10.0\IranCar.Server.ServiceDefaults.dll
+C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server.ServiceDefaults\bin\Debug\net10.0\IranCar.Server.ServiceDefaults.pdb
+C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server.ServiceDefaults\obj\Debug\net10.0\IranCar.Server.ServiceDefaults.csproj.AssemblyReference.cache
+C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server.ServiceDefaults\obj\Debug\net10.0\IranCar.Server.ServiceDefaults.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server.ServiceDefaults\obj\Debug\net10.0\IranCar.Server.ServiceDefaults.AssemblyInfoInputs.cache
+C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server.ServiceDefaults\obj\Debug\net10.0\IranCar.Server.ServiceDefaults.AssemblyInfo.cs
+C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server.ServiceDefaults\obj\Debug\net10.0\IranCar.Server.ServiceDefaults.csproj.CoreCompileInputs.cache
+C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server.ServiceDefaults\obj\Debug\net10.0\IranCar.Server.ServiceDefaults.sourcelink.json
+C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server.ServiceDefaults\obj\Debug\net10.0\IranCar.Server.ServiceDefaults.dll
+C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server.ServiceDefaults\obj\Debug\net10.0\refint\IranCar.Server.ServiceDefaults.dll
+C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server.ServiceDefaults\obj\Debug\net10.0\IranCar.Server.ServiceDefaults.pdb
+C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server.ServiceDefaults\obj\Debug\net10.0\ref\IranCar.Server.ServiceDefaults.dll
