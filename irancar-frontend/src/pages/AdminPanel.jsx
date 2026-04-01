@@ -6,21 +6,54 @@ const AdminPanel = () => {
     const [editingCar, setEditingCar] = useState(null);
     const [showModal, setShowModal] = useState(false);
 
+    useEffect(() => {
+        const speakWelcome = () => {
+            const msg = new SpeechSynthesisUtterance();
+            msg.text = "بروس عزیز، به پنل مدیریت خوش آمدید";
+            
+   
+            const voices = window.speechSynthesis.getVoices();
+            const farsiVoice = voices.find(v => v.lang.includes('fa') || v.name.includes('Persian'));
+
+            if (farsiVoice) {
+                msg.voice = farsiVoice;
+                msg.lang = 'fa-IR';
+            } else {
+
+                msg.text = "Welcome back, Master Bruce";
+                msg.lang = 'en-US';
+            }
+
+            window.speechSynthesis.speak(msg);
+        };
+
+
+        window.speechSynthesis.onvoiceschanged = () => {
+            console.log("صداها آماده شدند");
+        };
+
+       
+        const timer = setTimeout(() => {
+            speakWelcome();
+        }, 1000);
+
+        return () => clearTimeout(timer);
+    }, []);
+
     const fetchCars = async () => {
         try {
             const res = await axios.get('https://localhost:7017/api/cars');
             setCars(res.data);
         } catch (err) { console.error("خطا:", err); }
     };
+
     const handleLogout = () => {
-    localStorage.removeItem('isAdmin'); 
-    window.location.href = '/login'; 
-};
+        localStorage.removeItem('isAdmin'); 
+        window.location.href = '/login'; 
+    };
   
-    useEffect(() => { fetchCars(); 
-        if (localStorage.getItem('isAdmin') !== 'true') {
-    window.location.href = '/login'; 
-  }
+    useEffect(() => { 
+        fetchCars(); 
     }, []);
 
     const handleDelete = async (id) => {
@@ -33,7 +66,6 @@ const AdminPanel = () => {
     const openEditModal = (car) => {
         setEditingCar({ ...car });
         setShowModal(true);
-        console.log();
     };
 
     const handleUpdate = async (e) => {
@@ -53,39 +85,38 @@ const AdminPanel = () => {
     };
 
     return (
-        
         <div style={{ padding: '20px', direction: 'rtl', backgroundColor: '#f4f4f4', minHeight: '100vh' }}>
-            <button onClick={handleLogout} style={{ float: 'left', backgroundColor: '#555', color: '#fff', border: 'none', padding: '10px', borderRadius: '5px' }}>
-    خروج از پنل 🚪
-</button>
+            <button onClick={handleLogout} style={{ float: 'left', backgroundColor: '#555', color: '#fff', border: 'none', padding: '10px', borderRadius: '5px', cursor: 'pointer' }}>
+                خروج از پنل 🚪
+            </button>
             <h2 style={{ textAlign: 'center', color: '#333', marginBottom: '30px' }}>پنل مدیریت خودروها</h2>
             
             <table style={tableStyle}>
-               <thead>
-    <tr style={{ backgroundColor: '#2c3e50', color: 'white' }}>
-        <th style={thTdStyle}>برند</th>
-        <th style={thTdStyle}>مدل</th>
-        <th style={thTdStyle}>قیمت (تومان)</th>
-        <th style={thTdStyle}>عکس</th>
-        <th style={thTdStyle}>عملیات</th>
-    </tr>
-</thead>
-<tbody>
-    {cars.map((car) => (
-        <tr key={car.id} style={{ borderBottom: '1px solid #eee' }}>
-            <td style={{ ...thTdStyle, color: '#222', fontWeight: 'bold' }}>{car.brand}</td>
-            <td style={{ ...thTdStyle, color: '#444' }}>{car.name}</td>
-            <td style={{ ...thTdStyle, color: '#27ae60', fontWeight: 'bold' }}>
-                {Number(car.price).toLocaleString()}
-            </td>
-            <td style={{  color: '#444' }}>{car.imageName}</td>
-            <td style={thTdStyle}>
-                <button onClick={() => openEditModal(car)} style={editBtnStyle}>ویرایش ✏️</button>
-                <button onClick={() => handleDelete(car.id)} style={deleteBtnStyle}>حذف 🗑️</button>
-            </td>
-        </tr>
-    ))}
-</tbody>
+                <thead>
+                    <tr style={{ backgroundColor: '#2c3e50', color: 'white' }}>
+                        <th style={thTdStyle}>برند</th>
+                        <th style={thTdStyle}>مدل</th>
+                        <th style={thTdStyle}>قیمت (تومان)</th>
+                        <th style={thTdStyle}>عکس</th>
+                        <th style={thTdStyle}>عملیات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {cars.map((car) => (
+                        <tr key={car.id} style={{ borderBottom: '1px solid #eee' }}>
+                            <td style={{ ...thTdStyle, color: '#222', fontWeight: 'bold' }}>{car.brand}</td>
+                            <td style={{ ...thTdStyle, color: '#444' }}>{car.name}</td>
+                            <td style={{ ...thTdStyle, color: '#27ae60', fontWeight: 'bold' }}>
+                                {Number(car.price).toLocaleString()}
+                            </td>
+                            <td style={{ padding: '15px', color: '#444' }}>{car.imageName}</td>
+                            <td style={thTdStyle}>
+                                <button onClick={() => openEditModal(car)} style={editBtnStyle}>ویرایش ✏️</button>
+                                <button onClick={() => handleDelete(car.id)} style={deleteBtnStyle}>حذف 🗑️</button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
             </table>
 
             {showModal && (

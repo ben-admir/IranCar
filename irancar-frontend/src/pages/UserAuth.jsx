@@ -43,6 +43,8 @@ const handleSubmit = async (e) => {
     }
   } catch (error) {
     const errorMsg = error.response?.data?.message || "خطا در اتصال به سرور!";
+    alert("نام کاربری و پسورد معتبر نیست !")
+    
     toast.error(errorMsg);
   } finally {
     setLoading(false);

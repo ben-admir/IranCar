@@ -1,24 +1,43 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using IranCar.Server.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace IranCar.Controllers 
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        [HttpPost("login")]
-        public IActionResult Login([FromBody] UserLoginDto loginData)
-        {
-            if (string.IsNullOrEmpty(loginData.Username) || string.IsNullOrEmpty(loginData.Password))
-                return BadRequest("نام کاربری و رمز عبور الزامی است.");
-
-            return Ok(new { message = "ورود موفقیت‌آمیز" });
-        }
+        private readonly AppDbContext _context;
+        public AuthController(AppDbContext context) { _context = context; }
 
         [HttpPost("register")]
-        public IActionResult Register([FromBody] UserRegisterDto registerData)
+        public async Task<IActionResult> Register(User user)
         {
+            if (_context.Users.Any(u => u.Email == user.Email))
+                return BadRequest("این ایمیل قبلاً ثبت شده است.");
+
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
             return Ok(new { message = "ثبت‌نام با موفقیت انجام شد" });
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] User loginInfo)
+        {
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Email == loginInfo.Email && u.Password == loginInfo.Password);
+
+            if (user == null)
+            {
+                return Unauthorized(new { message = "ایمیل یا رمز عبور اشتباه است." });
+            }
+
+            return Ok(new
+            {
+                userName = user.Name, 
+                message = "خوش آمدید!"
+            });
         }
     }
 
