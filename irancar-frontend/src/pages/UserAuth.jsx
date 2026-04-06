@@ -12,8 +12,6 @@ const UserAuth = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
-  
   const navigate = useNavigate();
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -28,7 +26,7 @@ const handleSubmit = async (e) => {
       localStorage.setItem("userName", response.data.userName);
       localStorage.setItem("token", response.data.token); 
       
-      toast.success(`خوش آمدید، ${response.data.userName}!`);
+      toast.success(`خوش آمدید!، ${response.data.userName}!`);
       
       setTimeout(() => {
         navigate('/');
