@@ -50,7 +50,16 @@ const handleSubmit = async (e) => {
     setLoading(false);
   }
 };
+const handellogout = async(e)
+{
+password="";
+setName="";
+const response = await axios.post('https://localhost:7017/api/Auth/login', {
+    email: email,       
+    password: password  
+});
 
+};
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100" dir="rtl">
       <div className="card p-4 shadow-lg bg-dark text-white border-secondary" style={{ width: '450px', borderRadius: '20px' }}>

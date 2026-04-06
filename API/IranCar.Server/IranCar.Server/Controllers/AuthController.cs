@@ -25,8 +25,12 @@ namespace IranCar.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] User loginInfo)
         {
-            var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.Email == loginInfo.Email && u.Password == loginInfo.Password);
+            if (loginInfo == null || string.IsNullOrEmpty(loginInfo.Email))
+                return BadRequest("اطلاعات ناقص است.");
+
+            var user = _context.Users
+                .FirstOrDefault(u => u.Email.ToLower() == loginInfo.Email.ToLower()
+                                  && u.Password == loginInfo.Password);
 
             if (user == null)
             {
@@ -35,8 +39,9 @@ namespace IranCar.Controllers
 
             return Ok(new
             {
-                userName = user.Name, 
-                message = "خوش آمدید!"
+                userId = user.Id,
+                userName = user.Name,
+                message = "خوش آمدید بروس عزیز!"
             });
         }
     }
