@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import { User, Mail, Lock, ArrowRight } from 'lucide-react';
-
+import { User, Mail, Lock } from 'lucide-react';
 
 const UserAuth = () => {
   const [loading, setLoading] = useState(false);
@@ -12,52 +11,54 @@ const UserAuth = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  
   const navigate = useNavigate();
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
-
   const API_URL = "https://localhost:7017/api/Auth"; 
 
-  try {
-    if (isLogin) {
-      const response = await axios.post(`${API_URL}/login`, { email, password });
-      
-      localStorage.setItem("userName", response.data.userName);
-      localStorage.setItem("token", response.data.token); 
-      
-      toast.success(`خوش آمدید!، ${response.data.userName}!`);
-      
-      setTimeout(() => {
-        navigate('/');
-        window.location.reload();
-      }, 1500);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-    } else {
-      const response = await axios.post(`${API_URL}/register`, { email, password, name: email.split('@')[0] });
-      
-      toast.success("ثبت‌نام با موفقیت انجام شد! حالا وارد شوید.");
-      setIsLogin(true); 
+    try {
+      if (isLogin) {
+        // بخش ورود
+        const response = await axios.post(`${API_URL}/login`, { email, password });
+        
+        localStorage.setItem("userName", response.data.userName);
+        localStorage.setItem("isAdmin", response.data.userName === "مدیر سیستم" ? "true" : "false");
+        
+        toast.success(`خوش آمدید، ${response.data.userName}!`);
+        
+        setTimeout(() => {
+          navigate('/');
+          window.location.reload();
+        }, 1500);
+
+      } else {
+        // بخش ثبت‌نام - استفاده از نام واقعی وارد شده
+        await axios.post(`${API_URL}/register`, { email, password, name });
+        
+        toast.success("ثبت‌نام با موفقیت انجام شد! حالا وارد شوید.");
+        setIsLogin(true); 
+      }
+    } catch (error) {
+      const errorMsg = error.response?.data?.message || "نام کاربری یا رمز عبور معتبر نیست!";
+      toast.error(errorMsg);
+    } finally {
+      setLoading(false);
     }
-  } catch (error) {
-    const errorMsg = error.response?.data?.message || "خطا در اتصال به سرور!";
-    alert("نام کاربری و پسورد معتبر نیست !")
-    
-    toast.error(errorMsg);
-  } finally {
-    setLoading(false);
-  }
-};
-const handellogout = async(e)
-{
-password="";
-setName="";
-const response = await axios.post('https://localhost:7017/api/Auth/login', {
-    email: email,       
-    password: password  
-});
+  };
 
-};
+  // اصلاح تابع خروج (Logout) برای جلوگیری از ارور
+  const handleLogout = () => {
+    setPassword("");
+    setName("");
+    setEmail("");
+    localStorage.clear();
+    toast.success("از حساب خارج شدید");
+    navigate('/login');
+  };
+
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100" dir="rtl">
       <div className="card p-4 shadow-lg bg-dark text-white border-secondary" style={{ width: '450px', borderRadius: '20px' }}>
@@ -99,43 +100,42 @@ const response = await axios.post('https://localhost:7017/api/Auth/login', {
           </div>
 
           <div className="mb-3">
-  <label className="form-label small text-secondary">رمز عبور:</label>
-  <div className="input-group mb-2">
-    <span className="input-group-text bg-secondary border-0 text-white">
-      <Lock size={18} />
-    </span>
-    <input 
-      type={showPassword ? "text" : "password"} 
-      className="form-control bg-secondary text-white border-0" 
-      placeholder="******"
-      value={password}
-      onChange={(e) => setPassword(e.target.value)}
-      required 
-    />
-  </div>
+            <label className="form-label small text-secondary">رمز عبور:</label>
+            <div className="input-group mb-2">
+              <span className="input-group-text bg-secondary border-0 text-white">
+                <Lock size={18} />
+              </span>
+              <input 
+                type={showPassword ? "text" : "password"} 
+                className="form-control bg-secondary text-white border-0" 
+                placeholder="******"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required 
+              />
+            </div>
 
-  <div className="form-check form-check-inline mt-1">
-    <input 
-      className="form-check-input bg-secondary border-secondary" 
-      type="checkbox" 
-      id="showPassCheck"
-      checked={showPassword}
-      onChange={() => setShowPassword(!showPassword)} 
-    />
-    
-    <p>نمایش رمز عبور
-</p>
-    <label className="form-check-label small text-secondary" htmlFor="showPassCheck" style={{ cursor: 'pointer' }}>
-    </label>
-  </div>
-</div>
-<button 
-  type="submit" 
-  className="btn btn-warning w-100 fw-bold py-2 mb-3"
-  disabled={loading}
->
-  {loading ? "در حال پردازش..." : (isLogin ? "ورود به حساب" : "ثبت‌نام")}
-</button>
+            <div className="form-check form-check-inline mt-1">
+              <input 
+                className="form-check-input bg-secondary border-secondary" 
+                type="checkbox" 
+                id="showPassCheck"
+                checked={showPassword}
+                onChange={() => setShowPassword(!showPassword)} 
+              />
+              <label className="form-check-label small text-white ms-2" htmlFor="showPassCheck" style={{ cursor: 'pointer' }}>
+                نمایش رمز عبور
+              </label>
+            </div>
+          </div>
+
+          <button 
+            type="submit" 
+            className="btn btn-warning w-100 fw-bold py-2 mb-3"
+            disabled={loading}
+          >
+            {loading ? "در حال پردازش..." : (isLogin ? "ورود به حساب" : "ثبت‌نام")}
+          </button>
 
           <div className="text-center">
             <button 
