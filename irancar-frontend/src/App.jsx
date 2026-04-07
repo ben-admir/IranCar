@@ -10,7 +10,7 @@ import About from './pages/About';
 import UserAuth from './pages/UserAuth'; 
 import MyAds from './pages/MyAds';
 import CarDetails from './pages/CarDetails';
-
+import Footer from './components/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { User, PlusCircle, Settings } from 'lucide-react';
@@ -36,6 +36,7 @@ const Navbar = () => {
         </Link>
         
         <div className="navbar-nav ms-auto d-flex flex-row align-items-center gap-3">
+            <Link className="nav-link text-white" to="/about">درباره ی ما</Link>
           <Link className="nav-link text-white" to="/shop">نمایشگاه</Link>
 
           <Link className="nav-link text-warning d-flex align-items-center gap-1" to="/add-car">
@@ -102,6 +103,7 @@ function App() {
 
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
+        <Footer />
       </div>
     </div>
   );

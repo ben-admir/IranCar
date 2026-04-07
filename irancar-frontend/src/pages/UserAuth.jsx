@@ -21,8 +21,7 @@ const UserAuth = () => {
 
     try {
       if (isLogin) {
-        // بخش ورود
-        const response = await axios.post(`${API_URL}/login`, { email, password });
+        const response = await axios.post(`${API_URL}/login`, { email, password ,name });
         
         localStorage.setItem("userName", response.data.userName);
         localStorage.setItem("isAdmin", response.data.userName === "مدیر سیستم" ? "true" : "false");
@@ -35,7 +34,6 @@ const UserAuth = () => {
         }, 1500);
 
       } else {
-        // بخش ثبت‌نام - استفاده از نام واقعی وارد شده
         await axios.post(`${API_URL}/register`, { email, password, name });
         
         toast.success("ثبت‌نام با موفقیت انجام شد! حالا وارد شوید.");
@@ -49,7 +47,6 @@ const UserAuth = () => {
     }
   };
 
-  // اصلاح تابع خروج (Logout) برای جلوگیری از ارور
   const handleLogout = () => {
     setPassword("");
     setName("");
