@@ -29,22 +29,31 @@ const Shop = () => {
                     {cars.map((car, index) => {
                         const id = car.id || car.Id || car.ID;
                         const brand = car.brand || car.Brand || "نامشخص";
-                        const model = car.model || car.Model || "";
+                        const name = car.name || car.Name || "نامشخص";
+                        const color = car.color || car.Color || "نامشخص";
+                        const year = car.year || car.Year || "نامشخص";
                         const price = car.price || car.Price || 0;
                         const img = car.imageUrl || car.ImageUrl;
 
                         return (
                             <div className="col-md-4" key={id || index}>
                                 <div className="card bg-dark text-white border-secondary h-100 shadow">
-                                    <img 
+   <img 
   src={car.imageName 
     ? `https://localhost:7017/images/${car.imageName}` 
     : 'https://via.placeholder.com/300x200?text=No+Image'} 
   className="card-img-top" 
   alt={car.brand} 
+  style={{ 
+    height: '200px',        // ارتفاع ثابت برای تمام کارت‌ها
+    objectFit: 'cover',     // برش هوشمند تصویر برای پر کردن کادر بدون دفرمه شدن
+    objectPosition: 'center' // تمرکز برش روی مرکز تصویر
+  }} 
 />
                                     <div className="card-body">
-                                        <h5 className="fw-bold text-warning">{brand} {model}</h5>
+                                        <h5 className="fw-bold text-warning">{brand} {name}</h5>
+                                        <h5 className="fw-bold text-warning">{color}</h5>
+                                        <h5 className="fw-bold text-warning">{year}</h5>
                                         <div className="d-flex justify-content-between align-items-center mt-4 border-top pt-3 border-secondary">
                                             <span className="text-success fw-bold">{Number(price).toLocaleString()} تومان</span>
                                             <button className="btn btn-primary btn-sm px-3" 
