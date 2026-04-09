@@ -1,15 +1,50 @@
-import React from 'react';
-import MyCars from './MyCars';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import CarCard from '../components/CarCard'; 
 
 const MyAds = () => {
-    const userName = localStorage.getItem("userName");
-    return (
-        <div className="container mt-5 text-white text-end">
-            <h2>آگهی‌های من</h2>
-            <p>کاربر عزیز {userName}، لیست خودروهای ثبت شده توسط شما اینجا نمایش داده می‌شود.</p>
-            <div className="alert alert-info">بزودی لیست خودروهای شما به این صفحه اضافه می‌شود.</div>
+  const [myCars, setMyCars] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  const currentUserId = localStorage.getItem('userId');
+  
+  if (currentUserId && currentUserId !== "undefined") {
+    
+    axios.get(`http://localhost:5058/api/cars/user/${currentUserId}`)
+      .then(res => {
+        setMyCars(res.data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("ارور شبکه (احتمالاً سرور خاموشه):", err);
+        setLoading(false);
+      });
+  } else {
+    console.log("آیدی پیدا نشد! لطفا دوباره لاگین کنید.");
+    setLoading(false);
+  }
+}, []);
+
+  return (
+    <div className="container mt-5">
+      <h3 className="text-white mb-4">آگهی‌های من</h3>
+      
+      {loading ? (
+        <p className="text-info">در حال بارگذاری...</p>
+      ) : myCars.length > 0 ? (
+        <div className="row">
+          {myCars.map(car => (
+            <div className="col-md-4" key={car._id}>
+              <CarCard car={car} /> 
+            </div>
+          ))}
         </div>
-    );
+      ) : (
+        <div className="alert alert-info">شما هنوز هیچ آگهی ثبت نکرده‌اید.</div>
+      )}
+    </div>
+  );
 };
 
 export default MyAds;

@@ -36,7 +36,7 @@ const Navbar = () => {
         </Link>
         
         <div className="navbar-nav ms-auto d-flex flex-row align-items-center gap-3">
-            <Link className="nav-link text-white" to="/about">درباره ی ما</Link>
+            
           <Link className="nav-link text-white" to="/shop">نمایشگاه</Link>
 
           <Link className="nav-link text-warning d-flex align-items-center gap-1" to="/add-car">
@@ -46,6 +46,7 @@ const Navbar = () => {
           <Link className="nav-link text-info d-flex align-items-center gap-1" to="/admin">
             <Settings size={16} /> مدیریت
           </Link>
+          <Link className="nav-link text-white" to="/about">درباره ی ما</Link>
 
           {userName ? (
             <div className="dropdown">

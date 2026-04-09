@@ -45,9 +45,9 @@ const Shop = () => {
   className="card-img-top" 
   alt={car.brand} 
   style={{ 
-    height: '200px',        // ارتفاع ثابت برای تمام کارت‌ها
-    objectFit: 'cover',     // برش هوشمند تصویر برای پر کردن کادر بدون دفرمه شدن
-    objectPosition: 'center' // تمرکز برش روی مرکز تصویر
+    height: '200px',        
+    objectFit: 'cover',     
+    objectPosition: 'center' 
   }} 
 />
                                     <div className="card-body">

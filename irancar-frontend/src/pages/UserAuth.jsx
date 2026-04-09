@@ -22,9 +22,11 @@ const UserAuth = () => {
     try {
       if (isLogin) {
         const response = await axios.post(`${API_URL}/login`, { email, password ,name });
-        
+        console.log(response.data);
         localStorage.setItem("userName", response.data.userName);
         localStorage.setItem("isAdmin", response.data.userName === "مدیر سیستم" ? "true" : "false");
+        
+        localStorage.setItem('userId', response.data.id);
         
         toast.success(`خوش آمدید، ${response.data.userName}!`);
         

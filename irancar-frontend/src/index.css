@@ -110,10 +110,11 @@ code {
   background: var(--code-bg);
 }
 @font-face {
-  font-family: 'Vazir';
+font-family: 'Vazir';
   src: url('/font/Vazir.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {

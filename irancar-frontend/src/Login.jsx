@@ -5,19 +5,31 @@ const Login = () => {
   const [userField, setUserField] = useState('');
   const [passField, setPassField] = useState('');
   const navigate = useNavigate();
+  
 
   const handleLogin = (e) => {
     e.preventDefault();
 
+    // حالت اول: ورود ادمین
     if (userField === 'admin' && passField === '1234') {
-      
       localStorage.setItem('isAdmin', 'true');
       localStorage.setItem('userName', 'مدیر سیستم');
-
+      localStorage.setItem('userId', 'admin_root'); // یک آیدی ثابت برای ادمین
       navigate('/admin');
       window.location.reload();
-    } else {
-      alert("نام کاربری یا رمز عبور ادمین اشتباه است! ❌");
+    } 
+    // حالت دوم: ورود کاربر عادی (محمدمهدی میرزایی)
+    else if (userField === 'mmd' && passField === '1234') { 
+      localStorage.setItem('isAdmin', 'false');
+      localStorage.setItem('userName', 'محمدمهدی میرزایی');
+      // نکته طلایی: اینجا باید یک ID عددی یا رشته‌ای بدی که توی دیتابیس آگهی‌ها به این اسم باشه
+      localStorage.setItem('userId', '1'); 
+      
+      navigate('/my-ads');
+      window.location.reload();
+    } 
+    else {
+      alert("نام کاربری یا رمز عبور اشتباه است! ❌");
     }
   };
   
