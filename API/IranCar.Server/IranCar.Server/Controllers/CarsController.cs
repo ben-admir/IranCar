@@ -31,6 +31,21 @@ namespace IranCar.Server.Controllers
             return car;
         }
 
+        [HttpGet("user/{userId}")]
+        public async Task<ActionResult<IEnumerable<Car>>> GetUserCars(string userId)
+        {
+            var userCars = await _context.Cars
+                .Where(c => c.UserId == userId)
+                .ToListAsync();
+
+            if (userCars == null || !userCars.Any())
+            {
+                return Ok(new List<Car>()); 
+            }
+
+            return Ok(userCars);
+        }
+
         [HttpPost]
         public async Task<ActionResult<Car>> PostCar([FromForm] CarCreateDto carDto)
         {
