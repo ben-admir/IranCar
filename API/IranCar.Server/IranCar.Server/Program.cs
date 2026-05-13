@@ -1,7 +1,7 @@
 ﻿using IranCar.Server.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using IranCar.Server.Models; // این رو بر اساس نام پوشه‌ات تنظیم کن
+using IranCar.Server.Models; 
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>

@@ -38,12 +38,7 @@ namespace IranCar.Server.Controllers
                 .Where(c => c.UserId == userId)
                 .ToListAsync();
 
-            if (userCars == null || !userCars.Any())
-            {
-                return Ok(new List<Car>()); 
-            }
-
-            return Ok(userCars);
+            return Ok(userCars ?? new List<Car>());
         }
 
         [HttpPost]
