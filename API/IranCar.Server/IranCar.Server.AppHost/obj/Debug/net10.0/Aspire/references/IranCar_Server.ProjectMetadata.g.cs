@@ -16,4 +16,13 @@ public class IranCar_Server : global::Aspire.Hosting.IProjectMetadata
     /// The path to the IranCar_Server project.
     /// </summary>
     public string ProjectPath => """C:\Users\prime computer\Desktop\IranCar\API\IranCar.Server\IranCar.Server\IranCar.Server.csproj""";
+
+    /// <summary>
+    /// Gets a value indicating whether building the project before running it should be suppressed.
+    /// </summary>
+    /// <remarks>
+    /// Projects added via ProjectReference items in the AppHost project file are built as part of building the AppHost project process
+    /// so building them again before running is unnecessary. This property always returns true.
+    /// </remarks>
+    public bool SuppressBuild => true;
 }
