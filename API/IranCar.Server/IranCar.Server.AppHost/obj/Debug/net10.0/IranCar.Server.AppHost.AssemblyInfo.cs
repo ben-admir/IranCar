@@ -12,23 +12,21 @@ using System;
 using System.Reflection;
 
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("fab7b981-24f4-430e-9b82-c25952e9d0c3")]
-[assembly: System.Reflection.AssemblyMetadata("dcpclipath", "C:\\Users\\prime computer\\.nuget\\packages\\aspire.hosting.orchestration.win-x64\\9.5." +
-    "0\\tools\\dcp.exe")]
-[assembly: System.Reflection.AssemblyMetadata("dcpextensionpaths", "C:\\Users\\prime computer\\.nuget\\packages\\aspire.hosting.orchestration.win-x64\\9.5." +
-    "0\\tools\\ext\\")]
-[assembly: System.Reflection.AssemblyMetadata("dcpbinpath", "C:\\Users\\prime computer\\.nuget\\packages\\aspire.hosting.orchestration.win-x64\\9.5." +
-    "0\\tools\\ext\\bin\\")]
+[assembly: System.Reflection.AssemblyMetadata("dcpclipath", "C:\\Users\\prime computer\\.nuget\\packages\\aspire.hosting.orchestration.win-x64\\13.3" +
+    ".0\\tools\\dcp.exe")]
+[assembly: System.Reflection.AssemblyMetadata("dcpextensionpaths", "C:\\Users\\prime computer\\.nuget\\packages\\aspire.hosting.orchestration.win-x64\\13.3" +
+    ".0\\tools\\ext\\")]
 [assembly: System.Reflection.AssemblyMetadata("apphostprojectpath", "C:\\Users\\prime computer\\Desktop\\IranCar\\API\\IranCar.Server\\IranCar.Server.AppHost" +
     "")]
 [assembly: System.Reflection.AssemblyMetadata("apphostprojectname", "IranCar.Server.AppHost.csproj")]
-[assembly: System.Reflection.AssemblyMetadata("aspiredashboardpath", "C:\\Users\\prime computer\\.nuget\\packages\\aspire.dashboard.sdk.win-x64\\9.5.0\\tools\\" +
-    "Aspire.Dashboard.exe")]
+[assembly: System.Reflection.AssemblyMetadata("aspiredashboardpath", "C:\\Users\\prime computer\\.nuget\\packages\\aspire.dashboard.sdk.win-x64\\13.3.0\\tools" +
+    "\\Aspire.Dashboard.exe")]
 [assembly: System.Reflection.AssemblyMetadataAttribute("apphostprojectbaseintermediateoutputpath", "C:\\Users\\prime computer\\Desktop\\IranCar\\API\\IranCar.Server\\IranCar.Server.AppHost" +
     "\\obj\\")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("IranCar.Server.AppHost")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f2bd0b6e4a0844aa80f47d97b694c767927fe1fa")]
 [assembly: System.Reflection.AssemblyProductAttribute("IranCar.Server.AppHost")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IranCar.Server.AppHost")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

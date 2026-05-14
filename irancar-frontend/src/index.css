@@ -109,3 +109,38 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+@font-face {
+font-family: 'Vazir';
+  src: url('/font/Vazir.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Vazir';
+  src: url('/font/Vazir-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+* {
+  font-family: 'Vazir', sans-serif !important;
+}
+
+
+:root {
+  font-family: 'Vazir', sans-serif !important;
+}
+
+* {
+  font-family: 'Vazir', sans-serif !important;
+  direction: rtl; 
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #121212; 
+  color: white;
+}
