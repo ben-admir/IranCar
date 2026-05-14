@@ -12,11 +12,11 @@ const Footer = () => {
             
    
           <div className="d-flex gap-4 mt-3">
-  <a href="https://instagram.com/irancar" target="_blank" rel="noreferrer" className="text-white-50 hover-primary">
+  <a href="https://instagram.com/mohammad_mirzaeeiii" target="_blank" rel="noreferrer" className="text-white-50 hover-primary">
     <i className="bi bi-instagram" style={{ fontSize: '1.5rem' }}></i>
   </a>
   
-  <a href="https://t.me/irancar" target="_blank" rel="noreferrer" className="text-white-50 hover-primary">
+  <a href="https://t.me/mohammad_mirzaeeiii" target="_blank" rel="noreferrer" className="text-white-50 hover-primary">
     <i className="bi bi-telegram" style={{ fontSize: '1.5rem' }}></i>
   </a>
 </div>
