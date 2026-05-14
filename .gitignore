@@ -55,3 +55,8 @@ temp/
 
 # Misc
 *.local
+.vs/
+*.user
+*.suo
+bin/
+obj/
