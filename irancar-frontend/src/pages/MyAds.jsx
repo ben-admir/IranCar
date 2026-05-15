@@ -1,88 +1,89 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const MyAds = () => {
-    const [myCars, setMyCars] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
-    const userName = localStorage.getItem("userName");
+  const [myCars, setMyCars] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchMyAds = async () => {
-            try {
-                const res = await axios.get('https://localhost:7017/api/cars');
-                
-                // فیلتر سخت‌گیرانه: فقط ماشین‌هایی که نام مالکشان دقیقاً با نام کاربر برابر است[cite: 5]
-                const filtered = res.data.filter(car => {
-                    const owner = car.OwnerName || car.OwnerName;
-                    return owner === userName; 
-                });
+  const fetchMyAds = async () => {
+    const userEmail = localStorage.getItem('userEmail'); 
+    
+    if (userEmail) {
+      try {
+        const res = await axios.get(`http://localhost:5058/api/cars/by-email/${userEmail}`);
+        setMyCars(res.data);
+        setLoading(false);
+      } catch (err) {
+        console.error("خطا در دریافت آگهی‌ها:", err);
+        setLoading(false);
+      }
+    } else {
+      setLoading(false);
+    }
+  };
 
-                setMyCars(filtered);
-            } catch (err) {
-                console.error("خطا:", err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        if (userName) fetchMyAds();
-    }, [userName]);
+  useEffect(() => {
+    fetchMyAds();
+  }, []);
 
-    const handleDelete = async (id) => {
-        if (window.confirm("آیا از حذف این آگهی اطمینان دارید؟")) {
-            try {
-                await axios.delete(`https://localhost:7017/api/cars/${id}`);
-                setMyCars(myCars.filter(car => (car.id || car.Id) !== id));
-                alert("آگهی حذف شد ✅");
-            } catch (err) {
-                alert("خطا در حذف");
-            }
-        }
-    };
+  const handleDelete = async (id) => {
+    if (window.confirm("دکتر، از حذف این آگهی مطمئنی؟")) {
+      try {
+        await axios.delete(`http://localhost:5058/api/cars/${id}`);
+        setMyCars(myCars.filter(car => car.id !== id));
+        alert("آگهی با موفقیت حذف شد.");
+      } catch (err) {
+        alert("خطا در حذف آگهی.");
+      }
+    }
+  };
 
-    return (
-        <div className="container py-5 text-white text-end" dir="rtl">
-            <div className="mb-5 border-bottom border-secondary pb-3">
-                <h2 className="fw-bold text-warning">آگهی‌های من</h2>
-                <p className="text-secondary">فقط خودروهای ثبت شده توسط: <span className="text-white">{userName}</span></p>
-            </div>
+  return (
+    <div className="container mt-5 pt-5" style={{ direction: 'rtl' }}>
+      <div className="d-flex justify-content-between align-items-center mb-5 p-3 rounded" style={{backgroundColor: '#1a1a1a', borderRight: '5px solid #007bff'}}>
+        <h2 className="text-white m-0">مدیریت آگهی‌های من</h2>
+        <span className="text-muted">تعداد: {myCars.length}</span>
+      </div>
 
-            {loading ? (
-                <div className="text-center"><div className="spinner-border text-warning"></div></div>
-            ) : (
-                <div className="row g-4">
-                    {myCars.length > 0 ? (
-                        myCars.map((car) => (
-                            <div className="col-md-4" key={car.id || car.Id}>
-                                <div className="card bg-dark text-white border-secondary h-100 shadow">
-                                    <img 
-                                        src={car.imageName ? `https://localhost:7017/images/${car.imageName}` : 'https://via.placeholder.com/300x200'} 
-                                        className="card-img-top" 
-                                        style={{ height: '200px', objectFit: 'cover' }} 
-                                    />
-                                    <div className="card-body">
-                                        <h5 className="fw-bold text-warning">{car.brand || car.Brand} {car.name || car.Name}</h5>
-                                        <div className="d-flex justify-content-between align-items-center mt-4 border-top pt-3 border-secondary">
-                                            <span className="text-success fw-bold">{Number(car.price || car.Price).toLocaleString()} تومان</span>
-                                            <div className="d-flex gap-2">
-                                                <button className="btn btn-primary btn-sm px-3" onClick={() => navigate(`/car-details/${car.id || car.Id}`)}>جزئیات</button>
-                                                <button className="btn btn-outline-danger btn-sm" onClick={() => handleDelete(car.id || car.Id)}>حذف</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        <div className="text-center py-5 w-100">
-                            <h5 className="text-secondary">آگهی یافت نشد. (مطمئن شوید آگهی جدید با این کاربر ثبت کرده‌اید)</h5>
-                        </div>
-                    )}
+      {loading ? (
+        <div className="text-center text-info">در حال بارگذاری...</div>
+      ) : myCars.length > 0 ? (
+        <div className="row g-4">
+          {myCars.map(car => (
+            <div className="col-12 col-md-6 col-lg-4" key={car.id}>
+              <div className="card h-100 shadow-lg" style={{backgroundColor: '#212529', border: '1px solid #333', borderRadius: '15px', overflow: 'hidden'}}>
+                <img 
+                  src={car.imageName ? `http://localhost:5058/images/${car.imageName}` : '/no-image.png'} 
+                  className="card-img-top" 
+                  style={{height: '220px', objectFit: 'cover'}}
+                  alt="car"
+                />
+                <div className="card-body text-center p-4">
+                  <h4 className="fw-bold" style={{color: '#ffc107'}}>{car.brand} {car.name}</h4>
+                  <p className="text-white-50">{car.year} | {car.color}</p>
+                  <div className="d-flex justify-content-between align-items-center mt-3">
+                    <span className="fw-bold text-success">
+                      {car.price?.toLocaleString()} تومان
+                    </span>
+                    <button 
+                      onClick={() => handleDelete(car.id)}
+                      className="btn btn-outline-danger btn-sm rounded-pill px-3">
+                      حذف آگهی
+                    </button>
+                  </div>
                 </div>
-            )}
+              </div>
+            </div>
+          ))}
         </div>
-    );
+      ) : (
+        <div className="text-center py-5 rounded-3" style={{backgroundColor: '#1a1a1a', border: '2px dashed #333'}}>
+          <h4 className="text-muted">هنوز آگهی ثبت نکرده‌ای دکتر!</h4>
+          <a href="/add-car" className="btn btn-primary mt-3">ثبت خودرو</a>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default MyAds;

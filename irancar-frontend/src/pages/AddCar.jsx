@@ -3,12 +3,7 @@ import axios from 'axios';
 
 const AddCar = () => {
     const [car, setCar] = useState({
-        brand: '',
-        name: '',
-        color: '',
-        price: '',
-        year: '',
-        imageFile: null
+        brand: '', name: '', color: '', price: '', year: '', imageFile: null
     });
 
     const handleChange = (e) => {
@@ -22,67 +17,71 @@ const AddCar = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        const userEmail = localStorage.getItem('userEmail'); 
+        if (!userEmail) {
+            alert("دکتر، ایمیل شما یافت نشد! لطفا دوباره وارد حساب خود شوید.");
+            return;
+        }
 
         const formData = new FormData();
-        
+        formData.append('OwnerEmail', userEmail); 
         formData.append('Brand', car.brand);
         formData.append('Name', car.name);
         formData.append('Color', car.color);
         formData.append('Price', car.price);
         formData.append('Year', car.year);
-        formData.append('OwnerName', localStorage.getItem("userName"));
-        
         if (car.imageFile) {
             formData.append('ImageFile', car.imageFile);
         }
 
         try {
-            const response = await axios.post('https://localhost:7017/api/cars', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+            await axios.post('http://localhost:5058/api/cars', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
             });
-
-            console.log("پاسخ سرور:", response.data);
-            alert("آگهی با موفقیت ثبت شد! ✅");
-            
+            alert("تبریک دکتر! آگهی با موفقیت ثبت شد. ✅");
             setCar({ brand: '', name: '', color: '', price: '', year: '', imageFile: null });
         } catch (error) {
-            console.error("خطا در ثبت آگهی:", error.response?.data || error.message);
-            alert("خطا در ثبت آگهی. کنسول را چک کنید.");
+            console.error("خطا:", error.response?.data || error.message);
+            alert("خطا در ثبت آگهی.");
         }
     };
 
+    const inputStyle = {
+        width: '100%', padding: '12px', marginTop: '8px', borderRadius: '8px',
+        border: '1px solid #333', backgroundColor: '#2a2a2a', color: 'white', outline: 'none'
+    };
+
     return (
-        <div style={{ padding: '20px', maxWidth: '500px', margin: '0 auto', direction: 'rtl' }}>
-            <h2>ثبت خودروی جدید</h2>
+        <div style={{ padding: '30px', maxWidth: '550px', margin: '50px auto', direction: 'rtl', backgroundColor: '#1a1a1a', borderRadius: '15px', color: 'white', boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
+            <h2 style={{ borderBottom: '3px solid #007bff', paddingBottom: '15px', marginBottom: '25px', textAlign: 'center' }}>ثبت خودروی جدید</h2>
             <form onSubmit={handleSubmit}>
-                <div style={{ marginBottom: '10px' }}>
-                    <label>برند:</label>
-                    <input type="text" name="brand" value={car.brand} onChange={handleChange} style={{ width: '100%' }} required />
+                <div style={{ marginBottom: '15px' }}>
+                    <label>برند خودرو:</label>
+                    <input type="text" name="brand" value={car.brand} onChange={handleChange} style={inputStyle} placeholder="مثلاً BMW" required />
                 </div>
-                <div style={{ marginBottom: '10px' }}>
+                <div style={{ marginBottom: '15px' }}>
                     <label>مدل (Name):</label>
-                    <input type="text" name="name" value={car.name} onChange={handleChange} style={{ width: '100%' }} required />
+                    <input type="text" name="name" value={car.name} onChange={handleChange} style={inputStyle} placeholder="مثلاً X5" required />
                 </div>
-                <div style={{ marginBottom: '10px' }}>
-                    <label>رنگ:</label>
-                    <input type="text" name="color" value={car.color} onChange={handleChange} style={{ width: '100%' }} />
+                <div style={{ marginBottom: '15px' }}>
+                    <label>رنگ بدنه:</label>
+                    <input type="text" name="color" value={car.color} onChange={handleChange} style={inputStyle} placeholder="مثلاً سفید صدفی" />
                 </div>
-                <div style={{ marginBottom: '10px' }}>
-                    <label>قیمت:</label>
-                    <input type="number" name="price" value={car.price} onChange={handleChange} style={{ width: '100%' }} required />
+                <div style={{ marginBottom: '15px' }}>
+                    <label>قیمت (تومان):</label>
+                    <input type="number" name="price" value={car.price} onChange={handleChange} style={inputStyle} placeholder="مثلاً 450000000" required />
                 </div>
-                <div style={{ marginBottom: '10px' }}>
+                <div style={{ marginBottom: '15px' }}>
                     <label>سال تولید:</label>
-                    <input type="number" name="year" value={car.year} onChange={handleChange} style={{ width: '100%' }} />
+                    <input type="number" name="year" value={car.year} onChange={handleChange} style={inputStyle} placeholder="مثلاً 2023" />
                 </div>
-                <div style={{ marginBottom: '10px' }}>
+                <div style={{ marginBottom: '25px' }}>
                     <label>تصویر خودرو:</label>
-                    <input type="file" onChange={handleFileChange} style={{ width: '100%' }} accept="image/*" />
+                    <input type="file" onChange={handleFileChange} style={{ ...inputStyle, padding: '8px', border: '1px dashed #555' }} accept="image/*" />
                 </div>
-                <button type="submit" style={{ padding: '10px 20px', backgroundColor: '#007bff', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
-                    انتشار آگهی
+                <button type="submit" style={{ width: '100%', padding: '15px', backgroundColor: '#007bff', color: 'white', border: 'none', borderRadius: '10px', cursor: 'pointer', fontWeight: 'bold', fontSize: '1.1rem' }}>
+                    🚀 تایید و انتشار آگهی
                 </button>
             </form>
         </div>
