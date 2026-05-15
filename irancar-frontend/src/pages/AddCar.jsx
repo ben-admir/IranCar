@@ -30,6 +30,7 @@ const AddCar = () => {
         formData.append('Color', car.color);
         formData.append('Price', car.price);
         formData.append('Year', car.year);
+        formData.append('OwnerName', localStorage.getItem("userName"));
         
         if (car.imageFile) {
             formData.append('ImageFile', car.imageFile);
