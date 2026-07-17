@@ -1,0 +1,6 @@
+@IranCar.Server_HostAddress = http://localhost:5058
+
+GET {{IranCar.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

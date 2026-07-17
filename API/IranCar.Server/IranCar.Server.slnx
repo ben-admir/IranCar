@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="IranCar.Server.AppHost/IranCar.Server.AppHost.csproj" />
+  <Project Path="IranCar.Server.ServiceDefaults/IranCar.Server.ServiceDefaults.csproj" />
+  <Project Path="IranCar.Server/IranCar.Server.csproj" />
+</Solution>

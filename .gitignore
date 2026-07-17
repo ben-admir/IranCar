@@ -1,0 +1,36 @@
+## --- Visual Studio & IDEs ---
+.vs/
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.v12.bin
+*.v13.bin
+*.v14.bin
+*.v15.bin
+*.v16.bin
+*.v17.bin
+*.v18.bin
+*.vsidx
+.vs*
+out/
+TestResults/
+
+## --- Node & Frontend ---
+node_modules/
+dist/
+build/
+.env
+.env.local
+.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+## --- database ---
+*.db
+*.sqlite
+
+## --- Other ---
+.idea/
+.vscode/
